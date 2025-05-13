@@ -27,14 +27,13 @@ function Catalogo() {
     console.log(cartItems);
   }, [cartItems]);
 
-  // Mostrar todos los productos del carrito
+  // Console carrito
   useEffect(() => {
     console.log("Carrito:", cartItems);
   }, [cartItems]);
 
-  // Consolelog de productos
+  // Console productos
   useEffect(() => {
-    // console.log(productos);
     productos.map((prod) => console.log(prod));
   }, [productos]);
 

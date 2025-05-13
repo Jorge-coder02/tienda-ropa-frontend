@@ -39,7 +39,7 @@ const Cart = () => {
           {/* Contenedor carrito */}
           <div className="flex flex-col items-center justify-center gap-y-12 p-8 w-full ">
             {cartItems.map((item) => (
-              <div key={item.id} className="cart-item flex gap-x-4">
+              <div key={item._id} className="cart-item flex gap-x-4">
                 <div className="w-40 h-40 object-contain">
                   <img
                     src={item.imagen}
