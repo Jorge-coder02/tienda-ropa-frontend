@@ -10,6 +10,7 @@ function Header() {
     0
   );
 
+  // Console carrito
   return (
     <>
       {/* Mobile Menu */}
