@@ -32,12 +32,12 @@ const Cart = () => {
 
   return (
     <Layout>
-      <div className="cart flex flex-col gap-y-8 justify-center items-center lg:pt-20 pt-10">
+      <div className="cart flex flex-col gap-y-8 justify-center items-center lg:pt-20 pt-10 py-20">
         {/* Contenedor principal */}
-        <div className="w-[50%] flex flex-col items-center justify-center gap-y-12">
+        <div className="lg:w-[50%] flex flex-col items-center justify-center gap-y-12">
           <h1 className="text-4xl text-center">Carrito</h1>
           {/* Contenedor carrito */}
-          <div className="flex flex-col items-center justify-center gap-y-12 border border-black p-8 w-full ">
+          <div className="flex flex-col items-center justify-center gap-y-12 p-8 w-full ">
             {cartItems.map((item) => (
               <div key={item.id} className="cart-item flex gap-x-4">
                 <div className="w-40 h-40 object-contain">
