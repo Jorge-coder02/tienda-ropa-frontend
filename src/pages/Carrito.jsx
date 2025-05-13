@@ -61,7 +61,7 @@ const Cart = () => {
           </div>
         </div>
         <div className="flex flex-col gap-y-2 items-center justify-center">
-          <h3>Total: ${totalPrice}</h3>
+          <h3>Total: € {totalPrice.toFixed(2)}</h3>
           <Button>Finalizar compra</Button>
         </div>
       </div>

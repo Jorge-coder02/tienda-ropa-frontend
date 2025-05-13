@@ -17,7 +17,7 @@ function Header() {
       <nav className="flex justify-center items-center [&>a]:p-4">
         <Link to={"/"}>
           <div className="lg:mr-8 text-orange-600 font-semibold text-xl">
-            Logo
+            UrbanwearX
           </div>
         </Link>
         <Link to={"/"}>Home</Link>
