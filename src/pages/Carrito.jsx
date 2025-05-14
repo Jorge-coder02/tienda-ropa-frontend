@@ -13,8 +13,9 @@ const Cart = () => {
     console.log(cartItems);
   }, [cartItems]);
 
-  const handleRemoveItem = (id) => {
-    dispatch(removeFromCart({ id }));
+  const handleRemoveItem = (_id) => {
+    console.log("Eliminando producto con id:", _id); // ✅
+    dispatch(removeFromCart({ _id }));
   };
 
   const totalPrice = cartItems.reduce(
@@ -51,8 +52,8 @@ const Cart = () => {
                   <h3>{item.nombre}</h3>
                   <p>Precio: ${item.precio}</p>
                   <p>Cantidad: {item.quantity}</p>
-                  <p>Total: ${item.precio * item.quantity}</p>
-                  <button onClick={() => handleRemoveItem(item.id)}>
+                  <p>Total: ${(item.precio * item.quantity).toFixed(2)}</p>
+                  <button onClick={() => handleRemoveItem(item._id)}>
                     Eliminar
                   </button>
                 </div>

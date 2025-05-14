@@ -6,15 +6,20 @@
 // Para productos relacionados, se hace una petición al backend con la categoría
 // del producto. Pero con lazy loading
 
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+// Redux
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 import api from "../api/axios";
+// Componentes
 import Layout from "../layout/Layout";
 import Button from "../components/ui/Button.styles";
 
 export default function ProductDetail() {
   const API_URL = import.meta.env.VITE_API_URL;
   const { slug } = useParams(); // recojo de ItemProducto.jsx el .slug del producto pulsado
+  const dispatch = useDispatch();
   const [cargando, setCargando] = useState(true);
 
   const [producto, setProducto] = useState(null);
@@ -37,7 +42,7 @@ export default function ProductDetail() {
     };
 
     fetchProducto();
-  }, []);
+  }, [slug]);
 
   // Petición GET productos relacionados
   useEffect(() => {
@@ -55,7 +60,7 @@ export default function ProductDetail() {
     };
 
     fetchProducto();
-  }, [categoria, API_URL]);
+  }, [categoria]);
 
   if (cargando) return <p>Cargando producto...</p>;
   if (!producto) return <p>Producto no encontrado</p>;
@@ -79,7 +84,9 @@ export default function ProductDetail() {
               </div>
               <p>{producto.descripcion}</p>
               <div className="flex justify-center items-center gap-x-4 mt-6">
-                <Button>Añadir al carrito 🛒</Button>
+                <Button onClick={() => dispatch(addToCart(producto))}>
+                  Añadir al carrito 🛒
+                </Button>
               </div>
             </div>
           </div>
@@ -93,20 +100,23 @@ export default function ProductDetail() {
               productosRelacionados.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {productosRelacionados.map((producto) => (
-                    <div
-                      key={producto._id || producto.id}
-                      className="bg-[#fafafa] p-4"
+                    <Link
+                      to={`/productos/${producto.slug}`}
+                      key={producto._id}
+                      className="bg-[#fafafa] p-6 flex flex-col justify-between items-center shadow h-[400px]"
                     >
-                      <img
-                        src={producto.imagen}
-                        alt={producto.nombre}
-                        className="w-full h-auto"
-                      />
-                      <h3 className="text-lg font-semibold">
+                      <div className="w-64 h-64 mb-4 object-contain">
+                        <img
+                          src={producto.imagen}
+                          alt={producto.nombre}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <h3 className="text-lg font-semibold text-center">
                         {producto.nombre}
                       </h3>
-                      <p>{producto.precio} €</p>
-                    </div>
+                      <p className="text-center">{producto.precio} €</p>
+                    </Link>
                   ))}
                 </div>
               ) : (

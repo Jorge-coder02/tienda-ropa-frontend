@@ -7,33 +7,34 @@ function ItemProducto({ objeto_prod, nombre, precio, imagen }) {
   const dispatch = useDispatch();
 
   return (
-    <Link
-      to={`/productos/${objeto_prod.slug}`}
-      className="flex flex-col justify-between items-center
-     bg-[#f5f4f4] shadow p-6 min-h-[200px] lg:h-[380px]"
-    >
-      {/* Imagen */}
-      <div className="w-48 h-48 mb-4">
-        <img
-          className="w-full h-full object-contain"
-          src={`${imagen}`}
-          alt={imagen}
-        />
-      </div>
-      {/* Info */}
-      <div className="flex flex-col items-center justify-center gap-y-2">
+    <div className="flex flex-col gap-y-4 justify-between items-center bg-[#f5f4f4] shadow p-6 min-h-[200px] lg:h-[380px]">
+      {/* Imagen y título envueltos en Link */}
+      <Link
+        to={`/productos/${objeto_prod.slug}`}
+        className="w-full flex flex-col items-center"
+      >
+        <div className="w-48 h-48 mb-4">
+          <img
+            className="w-full h-full object-contain"
+            src={imagen}
+            alt={nombre}
+          />
+        </div>
         <div className="text-center">
           <h2>{nombre}</h2>
           <span>{precio} €</span>
         </div>
-        <Button
-          variant="tertiary"
-          onClick={() => dispatch(addToCart(objeto_prod))}
-        >
-          Añadir 🛒
-        </Button>
-      </div>
-    </Link>
+      </Link>
+
+      {/* Botón separado */}
+      <Button
+        variant=""
+        onClick={() => dispatch(addToCart(objeto_prod))}
+        className="mt-4"
+      >
+        Añadir 🛒
+      </Button>
+    </div>
   );
 }
 
