@@ -2,6 +2,12 @@
 
 # Sacar la lista de productos del backend:
 
+# Más
+
+    - Página dedicada a producto (slug)
+    - Lazy loading de Routes
+    - Cambiar paleta (tailwind.config)
+
 # Carrito
 
     - Alinear productos
@@ -12,3 +18,10 @@
     - Renombrar títulos (comp)
     - Scroll auto
     - Componentes cargando con fondo gris mientras carga
+
+### Tecnologías usadas:
+
+React js, Redux
+Styled Components
+UpTimeRobot: Monitorear el backend (cada 5mins.)
+Cloudinary: Alojar fotos de la API

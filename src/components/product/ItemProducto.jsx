@@ -1,12 +1,14 @@
 import Button from "../ui/Button.styles";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/cartSlice";
+import { Link } from "react-router-dom";
 
 function ItemProducto({ objeto_prod, nombre, precio, imagen }) {
   const dispatch = useDispatch();
 
   return (
-    <div
+    <Link
+      to={`/producto/${objeto_prod.slug}`}
       className="flex flex-col justify-between items-center
      bg-[#b4956d63] shadow p-6 min-h-[200px] lg:h-[380px]"
     >
@@ -28,7 +30,7 @@ function ItemProducto({ objeto_prod, nombre, precio, imagen }) {
           Añadir 🛒
         </Button>
       </div>
-    </div>
+    </Link>
   );
 }
 
