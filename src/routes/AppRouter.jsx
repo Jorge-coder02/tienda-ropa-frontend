@@ -12,7 +12,7 @@ export default function AppRouter() {
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/" element={<Home />} />
-        <Route path="/producto/:slug" element={<ProductDetail />} />
+        <Route path="/productos/:slug" element={<ProductDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

@@ -8,7 +8,7 @@ function ItemProducto({ objeto_prod, nombre, precio, imagen }) {
 
   return (
     <Link
-      to={`/producto/${objeto_prod.slug}`}
+      to={`/productos/${objeto_prod.slug}`}
       className="flex flex-col justify-between items-center
      bg-[#f5f4f4] shadow p-6 min-h-[200px] lg:h-[380px]"
     >

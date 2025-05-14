@@ -8,6 +8,7 @@
 
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import api from "../api/axios";
 import Layout from "../layout/Layout";
 import Button from "../components/ui/Button.styles";
 
@@ -25,11 +26,9 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchProducto = async () => {
       try {
-        const res = await fetch(`${API_URL}/productos/${slug}`); // ...products/slug-123 -> backend responde
-        const data = await res.json();
-        setProducto(data);
-        setCategoria(data.categoria); // Para productos relacionados
-        console.log(data.categoria);
+        const res = await api.get(`/productos/${slug}`); // ...productos/slug-123 -> backend responde
+        setProducto(res.data);
+        setCategoria(res.data.categoria); // Para productos relacionados
       } catch (error) {
         console.error("Error al cargar el producto:", error);
       } finally {
@@ -44,18 +43,19 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchProducto = async () => {
       try {
-        const res = await fetch(`${API_URL}/productos/${categoria}`); // ...products/'pantalones'
-        const data = await res.json();
-        setProductosRelacionados(data);
+        console.log(categoria);
+        const res = await api.get(`/productos/categoria/${categoria}`); // ...products/categoria/'pantalones'
+        setProductosRelacionados(res.data);
       } catch (error) {
         console.error("Error al cargar el producto:", error);
       } finally {
         setCargando(false);
+        // console.log("Prod: ", productosRelacionados);
       }
     };
 
     fetchProducto();
-  }, [categoria]);
+  }, [categoria, API_URL]);
 
   if (cargando) return <p>Cargando producto...</p>;
   if (!producto) return <p>Producto no encontrado</p>;

@@ -4,6 +4,7 @@
 
 # Más
 
+    - Añadir al carrito funcional en productdetail
     - Lazy loading de Routes
     - Cambiar paleta (tailwind.config) (configurar ciertos colores de la paleta)
 
