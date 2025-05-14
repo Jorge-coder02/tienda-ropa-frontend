@@ -28,14 +28,14 @@ function Catalogo() {
   }, [cartItems]);
 
   // Console carrito
-  useEffect(() => {
-    console.log("Carrito:", cartItems);
-  }, [cartItems]);
+  // useEffect(() => {
+  //   console.log("Carrito:", cartItems);
+  // }, [cartItems]);
 
-  // Console productos
-  useEffect(() => {
-    productos.map((prod) => console.log(prod));
-  }, [productos]);
+  // // Console productos
+  // useEffect(() => {
+  //   productos.map((prod) => console.log(prod));
+  // }, [productos]);
 
   return (
     <Layout>

@@ -13,7 +13,7 @@ function MobileMenu() {
   return (
     <header
       className="flex lg:flex-row flex-col sticky top-0 z-50 justify-between items-center px-12 [&>nav]:gap-x-4 
-     [&>nav>a]:py-6 [&>nav>a]:px-2 bg-[#fff]"
+     [&>nav>a]:py-6 [&>nav>a]:px-2 bg-[#f5f5f5]"
     >
       <nav className="flex justify-center items-center [&>a]:p-4">
         {/* Izquierda */}

@@ -4,9 +4,8 @@
 
 # Más
 
-    - Página dedicada a producto (slug)
     - Lazy loading de Routes
-    - Cambiar paleta (tailwind.config)
+    - Cambiar paleta (tailwind.config) (configurar ciertos colores de la paleta)
 
 # Carrito
 

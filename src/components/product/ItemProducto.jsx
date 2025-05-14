@@ -10,7 +10,7 @@ function ItemProducto({ objeto_prod, nombre, precio, imagen }) {
     <Link
       to={`/producto/${objeto_prod.slug}`}
       className="flex flex-col justify-between items-center
-     bg-[#b4956d63] shadow p-6 min-h-[200px] lg:h-[380px]"
+     bg-[#f5f4f4] shadow p-6 min-h-[200px] lg:h-[380px]"
     >
       {/* Imagen */}
       <div className="w-48 h-48 mb-4">
@@ -26,7 +26,10 @@ function ItemProducto({ objeto_prod, nombre, precio, imagen }) {
           <h2>{nombre}</h2>
           <span>{precio} €</span>
         </div>
-        <Button onClick={() => dispatch(addToCart(objeto_prod))}>
+        <Button
+          variant="tertiary"
+          onClick={() => dispatch(addToCart(objeto_prod))}
+        >
           Añadir 🛒
         </Button>
       </div>

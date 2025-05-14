@@ -5,17 +5,18 @@
 
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Layout from "../layout/Layout";
 
 export default function ProductDetail() {
   const API_URL = import.meta.env.VITE_API_URL;
-  const { slug } = useParams();
+  const { slug } = useParams(); // recojo de ItemProducto.jsx el .slug del producto pulsado
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
     const fetchProducto = async () => {
       try {
-        const res = await fetch(`${API_URL}/${slug}`); // products/slug..., en backend responder
+        const res = await fetch(`${API_URL}/productos/${slug}`); // ...products/slug-123 -> backend responde
         const data = await res.json();
         setProducto(data);
       } catch (error) {
@@ -26,18 +27,31 @@ export default function ProductDetail() {
     };
 
     fetchProducto();
-  }, [slug, API_URL]);
+  }, []);
 
   if (cargando) return <p>Cargando producto...</p>;
   if (!producto) return <p>Producto no encontrado</p>;
 
   return (
-    <div>
-      <h1>{producto.nombre}</h1>
-      <p>{producto.descripcion}</p>
-      <p>
-        <strong>Precio:</strong> {producto.precio} €
-      </p>
-    </div>
+    <Layout>
+      <div className="min-h-[calc(100dvh-76px)] flex flex-col gap-y-8 justify-center items-center lg:pt-20 pt-10">
+        {/* Contenedor principal */}
+        {/* Contenedor producto */}
+        <div className="flex justify-center items-center max-w-[60%]">
+          {/* Imagen */}
+          <div className="flex-1 bg-[#fafafa] flex justify-center items-center py-24">
+            <img src={`${producto.imagen}`} alt={`${producto.imagen}`} />
+          </div>
+          {/* Info */}
+          <div className="flex-1 flex flex-col gap-y-4 p-4">
+            <h1>{producto.nombre}</h1>
+            <p>{producto.descripcion}</p>
+            <p>
+              <strong>Precio:</strong> {producto.precio} €
+            </p>
+          </div>
+        </div>
+      </div>
+    </Layout>
   );
 }
