@@ -17,6 +17,7 @@
     - Renombrar títulos (comp)
     - Scroll auto
     - Componentes cargando con fondo gris mientras carga
+    - Foto alternativa de cada prenda (en bbdd otro campo más) para cambiar en ProductDetail
 
 ### Tecnologías usadas:
 
