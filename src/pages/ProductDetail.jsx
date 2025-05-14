@@ -44,7 +44,7 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchProducto = async () => {
       try {
-        const res = await fetch(`${API_URL}/productos/categoria`); // ...products/categoria -> backend responde
+        const res = await fetch(`${API_URL}/productos/${categoria}`); // ...products/'pantalones'
         const data = await res.json();
         setProductosRelacionados(data);
       } catch (error) {
@@ -62,52 +62,57 @@ export default function ProductDetail() {
 
   return (
     <Layout>
-      <div className="min-h-[calc(100dvh-76px)] flex flex-col gap-y-8 justify-center items-center lg:pt-0 pt-10">
+      <div className="min-h-[calc(100dvh-76px)] flex flex-col gap-y-8 justify-center items-center lg:pt-12 pt-10">
         {/* Contenedor principal */}
-        {/* Contenedor producto */}
-        <div className="flex flex-col lg:flex-row gap-x-8 justify-center items-center max-w-[60%]">
-          {/* Imagen */}
-          <div className="flex-[2] bg-[#fafafa] flex justify-center items-center py-24">
-            <img src={`${producto.imagen}`} alt={`${producto.imagen}`} />
-          </div>
-          {/* Info */}
-          <div className="flex-[2] flex flex-col gap-y-4 p-4">
-            <div className="">
-              <h1 className="text-xl font-semibold">{producto.nombre}</h1>
-              <p>{producto.precio} €</p>
+        <div className="flex flex-col gap-y-28 justify-center items-center max-w-[60%]">
+          {/* Contenedor producto */}
+          <div className="flex flex-col lg:flex-row gap-x-8 justify-center items-center ">
+            {/* Imagen */}
+            <div className="flex-[2] bg-[#fafafa] flex justify-center items-center py-24">
+              <img src={`${producto.imagen}`} alt={`${producto.imagen}`} />
             </div>
-            <p>{producto.descripcion}</p>
-            <div className="flex justify-center items-center gap-x-4">
-              <Button>Añadir al carrito 🛒</Button>
-            </div>
-          </div>
-        </div>
-        {/* Contenedor productos relacionados */}
-        <div className="flex flex-col gap-y-4">
-          <h2 className="text-xl font-semibold">Productos relacionados</h2>
-          {/* Contenedor productos relacionados */}
-          <div className="">
-            {Array.isArray(productosRelacionados) &&
-            productosRelacionados.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {productosRelacionados.map((producto) => (
-                  <div
-                    key={producto._id || producto.id}
-                    className="bg-[#fafafa] p-4"
-                  >
-                    <img
-                      src={producto.imagen}
-                      alt={producto.nombre}
-                      className="w-full h-auto"
-                    />
-                    <h3 className="text-lg font-semibold">{producto.nombre}</h3>
-                    <p>{producto.precio} €</p>
-                  </div>
-                ))}
+            {/* Info */}
+            <div className="flex-[2] flex flex-col gap-y-4 p-4">
+              <div className="">
+                <h1 className="text-xl font-semibold">{producto.nombre}</h1>
+                <p>{producto.precio} €</p>
               </div>
-            ) : (
-              <p>No hay productos relacionados</p>
-            )}
+              <p>{producto.descripcion}</p>
+              <div className="flex justify-center items-center gap-x-4 mt-6">
+                <Button>Añadir al carrito 🛒</Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Contenedor productos relacionados */}
+          <div className="flex flex-col gap-y-4">
+            <h2 className="text-xl font-semibold">Productos relacionados</h2>
+            {/* Contenedor productos relacionados */}
+            <div className="">
+              {Array.isArray(productosRelacionados) &&
+              productosRelacionados.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {productosRelacionados.map((producto) => (
+                    <div
+                      key={producto._id || producto.id}
+                      className="bg-[#fafafa] p-4"
+                    >
+                      <img
+                        src={producto.imagen}
+                        alt={producto.nombre}
+                        className="w-full h-auto"
+                      />
+                      <h3 className="text-lg font-semibold">
+                        {producto.nombre}
+                      </h3>
+                      <p>{producto.precio} €</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p>No hay productos relacionados</p>
+              )}
+            </div>
           </div>
         </div>
       </div>
