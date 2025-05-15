@@ -4,7 +4,6 @@
 
 # Más
 
-    - Footer en layout
     - Implementar ropa hombre/mujer (campo género y endpoint de cada, por defecto hombre al cargar catálogo)
     - Cambiar paleta (tailwind.config) (configurar ciertos colores de la paleta)
 
