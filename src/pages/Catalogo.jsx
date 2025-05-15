@@ -1,5 +1,5 @@
 import Layout from "../layout/Layout";
-import ItemProducto from "../components/product/ItemProducto";
+import ItemProducto from "../components/ui/PageComps/catalogo/ItemProducto";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 

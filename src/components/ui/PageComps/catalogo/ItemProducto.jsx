@@ -1,6 +1,6 @@
-import Button from "../ui/btn/Button.styles";
+import Button from "../../btn/Button.styles";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/cartSlice";
+import { addToCart } from "../../../../store/cartSlice";
 import { Link } from "react-router-dom";
 
 function ItemProducto({ objeto_prod, nombre, precio, imagen }) {
@@ -27,11 +27,7 @@ function ItemProducto({ objeto_prod, nombre, precio, imagen }) {
       </Link>
 
       {/* Botón separado */}
-      <Button
-        variant=""
-        onClick={() => dispatch(addToCart(objeto_prod))}
-        className="mt-4"
-      >
+      <Button onClick={() => dispatch(addToCart(objeto_prod))} className="mt-4">
         Añadir 🛒
       </Button>
     </div>

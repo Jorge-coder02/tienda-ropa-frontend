@@ -3,13 +3,13 @@ import styled from "styled-components";
 // Componente Styled Button
 const variantColors = {
   primary: "#60a5fa",
-  secondary: "#34d399",
+  secondary: "#14d399",
   tertiary: "#a78bfa",
 };
 
 const variantHoverColors = {
-  primary: "#8b5cf6",
-  secondary: "#8b5cf6",
+  primary: "#20a5fa",
+  secondary: "#34d399",
   tertiary: "#8b5cf6",
 };
 
@@ -32,6 +32,7 @@ const StyledButton = styled.button`
 
   &:active {
     transform: translateY(0);
+    transition: transform 0.2s ease;
   }
 
   a {

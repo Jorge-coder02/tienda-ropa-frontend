@@ -24,7 +24,7 @@ function ItemCartProduct({ item }) {
       w-full lg:w-[80%] min-h-[120px] items-center justify-between"
     >
       {/* Contenedor imagen */}
-      <div className="flex justify-center items-center w-40 h-40 object-contain">
+      <div className="flex justify-center items-center w-40 h-40 object-contain bg-[#]">
         <Link className="hover:underline" to={`/productos/${item.slug}`}>
           <img
             src={item.imagen}

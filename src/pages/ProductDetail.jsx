@@ -1,10 +1,10 @@
 // En este componente se va a mostrar el detalle de un producto
 // y se va a poder añadir al carrito
 // Funcionamiento: se hace una peticion al backend con el slug del producto
-// y se muestra el detalle del producto. Se crea dinámicamente la ruta
+// y se muestra el detalle del producto. La ruta se ha creado dinámicamente
 
 // Para productos relacionados, se hace una petición al backend con la categoría
-// del producto. Pero con lazy loading
+// del producto (slug.categoria). **Pero con lazy loading**
 
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
@@ -15,6 +15,7 @@ import api from "../api/axios";
 // Componentes
 import Layout from "../layout/Layout";
 import Button from "../components/ui/btn/Button.styles";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
 
 export default function ProductDetail() {
   const API_URL = import.meta.env.VITE_API_URL;
@@ -30,6 +31,7 @@ export default function ProductDetail() {
   // Petición GET producto
   useEffect(() => {
     const fetchProducto = async () => {
+      setCargando(true);
       try {
         const res = await api.get(`/productos/${slug}`); // ...productos/slug-123 -> backend responde
         setProducto(res.data);
@@ -62,7 +64,7 @@ export default function ProductDetail() {
     fetchProducto();
   }, [categoria]);
 
-  if (cargando) return <p>Cargando producto...</p>;
+  if (cargando) return <LoadingSpinner />; // Esto no parece estar funcionando
   if (!producto) return <p>Producto no encontrado</p>;
 
   return (
