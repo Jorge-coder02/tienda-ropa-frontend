@@ -9,7 +9,7 @@
 
 # Carrito
 
-    - Añadir enlace al producto en ItemCartProduct
+    - Eliminar/Añadir por cantidad
     - Poder vaciar carrito
 
 # Extra

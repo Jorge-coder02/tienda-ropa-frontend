@@ -1,5 +1,5 @@
-import ItemSocial from "../components/ui/footer/ItemSocial";
-import ItemEnlace from "../components/ui/footer/ItemEnlace";
+import ItemSocial from "../components/ui/PageComps/footer/ItemSocial";
+import ItemEnlace from "../components/ui/PageComps/footer/ItemEnlace";
 
 const enlaces_paginas = [
   { to: "/", text: "FAQ" },
