@@ -1,4 +1,4 @@
-import Button from "../ui/Button.styles";
+import Button from "../ui/btn/Button.styles";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/cartSlice";
 import { Link } from "react-router-dom";

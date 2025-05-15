@@ -9,11 +9,12 @@
 
 # Carrito
 
-    - Alinear productos
+    - Añadir enlace al producto en ItemCartProduct
     - Poder vaciar carrito
 
 # Extra
 
+    - Hover variantes Button
     - Renombrar títulos (comp)
     - Scroll auto
     - Componentes cargando con fondo gris mientras carga
@@ -21,7 +22,8 @@
 
 ### Tecnologías usadas:
 
-React js, Redux
+React, Redux
 Styled Components
 UpTimeRobot: Monitorear el backend (cada 5mins.)
 Cloudinary: Alojar fotos de la API
+API propia de donde se proveen artículos

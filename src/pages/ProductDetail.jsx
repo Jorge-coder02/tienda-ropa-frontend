@@ -14,7 +14,7 @@ import { addToCart } from "../store/cartSlice";
 import api from "../api/axios";
 // Componentes
 import Layout from "../layout/Layout";
-import Button from "../components/ui/Button.styles";
+import Button from "../components/ui/btn/Button.styles";
 
 export default function ProductDetail() {
   const API_URL = import.meta.env.VITE_API_URL;

@@ -22,7 +22,10 @@ function Footer() {
       {/* Contenedor ambos navs */}
       <div className="flex flex-col gap-y-16 justify-center items-center w-[75%]">
         {/* Enlaces páginas */}
-        <nav className="flex justify-evenly items-center [&>a]:border-r-2 [&>a]:border-gray-300 [&>a:last-child]:border-r-0">
+        <nav
+          className="flex flex-col lg:flex-row justify-center gap-y-4 lg:justify-evenly items-center lg:[&>a]:border-r-2 
+        lg:[&>a]:border-gray-300 lg:[&>a:last-child]:border-r-0"
+        >
           {enlaces_paginas.map((enlace, index) => (
             <ItemEnlace key={index} to={enlace.to}>
               {enlace.text}
