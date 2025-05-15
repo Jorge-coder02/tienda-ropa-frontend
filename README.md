@@ -8,14 +8,21 @@ API propia de donde se proveen artículos
 
 ### 🟡 Funcionalidades pendientes:
 
-# Header
+# Home
 
-    - Tener en cuenta en qué página estoy
+    - Vídeo de fondo o imagen
+    - Más abajo algo como: Conoce tu estilo... y 3 fotos (estilos)
 
 # Catálogo
 
+    - Añadir atributo en bbdd de genero (posibilidad de ambos/unisex?)
     - Implementar ropa hombre/mujer (campo género y endpoint de cada, por defecto hombre al cargar catálogo)
+    - Barra género se actualice según selección
     - Filtrar productos
+
+# Producto
+
+    - Quitar el elemento actual de los relacionados
 
 # Carrito
 
@@ -23,10 +30,7 @@ API propia de donde se proveen artículos
 
 # Extra
 
-    - Hover variantes Button
     - Cambiar paleta (tailwind.config) (configurar ciertos colores de la paleta)
-    - Renombrar títulos (comp)
-    - Scroll auto
     - Componentes cargando con fondo gris mientras carga
     - Foto alternativa de cada prenda (en bbdd otro campo más) para cambiar en ProductDetail
     - Componente para títulos <Titulo> (para evitar repetir text-center font...)

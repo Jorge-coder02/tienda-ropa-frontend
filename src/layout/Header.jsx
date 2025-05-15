@@ -1,8 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+// import { useEffect } from "react";
 import MobileMenu from "./header/MobileMenu";
 
 function Header() {
+  // Determina si la ruta coincide
+  const location = useLocation();
+  const isActive = (path) => location.pathname === path;
+  // useEffect(() => {
+  //   console.log(location.pathname);
+  // }, []);
+
   const cartItems = useSelector((state) => state.cart.items);
   // Calcular la cantidad total de productos (sumando la cantidad de cada producto)
   const totalQuantity = cartItems.reduce(
@@ -20,24 +28,38 @@ function Header() {
 
       {/* 💻 Pc Menu */}
       <header
-        className="hidden lg:flex lg:flex-row flex-col sticky top-0 z-50 justify-between items-center px-12 [&>nav]:gap-x-4 
-     [&>nav>a]:py-6 [&>nav>a]:px-2 bg-[#f5f5f5]"
+        className="hidden lg:flex lg:flex-row flex-col sticky top-0 z-50 justify-between items-center px-12 
+        [&>nav]:gap-x-4 [&>nav>a]:py-6 [&>nav>a]:px-2 bg-[#f5f5f5]"
       >
         <nav className="flex justify-center items-center ">
-          <Link className=" !opacity-100" to={"/"}>
+          <Link className="" to={"/"}>
             <div className="lg:mr-8 text-orange-600 font-bold text-xl">
               UrbanwearX
             </div>
           </Link>
-          <div className="[&>*]:p-4 [&>*]:font-medium [&>*]:text-gray-500 hover:[&>*]:text-black">
-            <Link to={"/"}>HOME</Link>
-            <Link className="" to={"/catalogo"}>
+          <div className="[&>*]:p-4 [&>*]:font-medium hover:[&>*]:text-gray-800">
+            <Link
+              to={"/"}
+              className={isActive("/") ? "text-gray-800" : "text-gray-400"}
+            >
+              HOME
+            </Link>
+            <Link
+              to={"/catalogo"}
+              className={
+                isActive("/catalogo") ? "text-gray-800" : "text-gray-400"
+              }
+            >
               CATÁLOGO
             </Link>
             <div className="group relative inline-block">
               <Link
-                to="/hombre"
-                className="opacity-50 pointer-events-none cursor-default"
+                to="/mujer"
+                className={
+                  isActive("/mujer")
+                    ? "text-gray-800"
+                    : "text-gray-400 pointer-events-none cursor-default"
+                }
                 aria-disabled="true"
               >
                 HOMBRE
@@ -53,7 +75,11 @@ function Header() {
             <div className="group relative inline-block">
               <Link
                 to="/hombre"
-                className="opacity-50 pointer-events-none cursor-default"
+                className={
+                  isActive("/hombre")
+                    ? "text-gray-800"
+                    : "text-gray-400 pointer-events-none cursor-default"
+                }
                 aria-disabled="true"
               >
                 MUJER
