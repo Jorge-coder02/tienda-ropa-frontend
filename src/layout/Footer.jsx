@@ -38,7 +38,6 @@ function Footer() {
             <ItemSocial
               key={index}
               img_src={`/img/socials/${enlace.img}`}
-              tamano={"6"}
               enlace={enlace.to}
             />
           ))}
