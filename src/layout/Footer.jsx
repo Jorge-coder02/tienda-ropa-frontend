@@ -1,22 +1,24 @@
 import ItemSocial from "../components/ui/PageComps/footer/ItemSocial";
 import ItemEnlace from "../components/ui/PageComps/footer/ItemEnlace";
 
-const enlaces_paginas = [
-  { to: "/", text: "FAQ" },
-  { to: "/", text: "Aviso legal" },
-  { to: "/", text: "Protección de datos" },
-  { to: "/", text: "About us" },
-  { to: "/", text: "Contacto" },
-  { to: "/", text: "Trabajo" },
-];
-const enlaces_sociales = [
-  { to: "https://www.facebook.com/urbanwearxjorge", img: "facebook.svg" },
-  { to: "https://www.instagram.com/urbanwearxjorge", img: "instagram.svg" },
-  { to: "https://www.tiktok.com/urbanwearxjorge", img: "tiktok.svg" },
-  { to: "https://www.youtube.com/urbanwearxjorge", img: "youtube.svg" },
-];
-
 function Footer() {
+  const currentPage = window.location.pathname;
+
+  // Enlaces de las páginas (de momento no se usan)
+  const enlaces_paginas = [
+    { to: currentPage, text: "FAQ" },
+    { to: currentPage, text: "Aviso legal" },
+    { to: currentPage, text: "Protección de datos" },
+    { to: currentPage, text: "About us" },
+    { to: currentPage, text: "Contacto" },
+    { to: currentPage, text: "Trabajo" },
+  ];
+  const enlaces_sociales = [
+    { to: "https://www.facebook.com/urbanwearxjorge", img: "facebook.svg" },
+    { to: "https://www.instagram.com/urbanwearxjorge", img: "instagram.svg" },
+    { to: "https://www.tiktok.com/urbanwearxjorge", img: "tiktok.svg" },
+    { to: "https://www.youtube.com/urbanwearxjorge", img: "youtube.svg" },
+  ];
   return (
     <footer className="flex justify-center items-center bg-[#f5f5f5] py-20 mt-32 ">
       {/* Contenedor ambos navs */}

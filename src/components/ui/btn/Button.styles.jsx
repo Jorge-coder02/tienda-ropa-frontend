@@ -1,15 +1,16 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 // Componente Styled Button
 const variantColors = {
   primary: "#60a5fa",
-  secondary: "#14d399",
+  secondary: "#d6672d",
   tertiary: "#a78bfa",
 };
 
 const variantHoverColors = {
   primary: "#20a5fa",
-  secondary: "#34d399",
+  secondary: "#ea580c",
   tertiary: "#8b5cf6",
 };
 
@@ -42,18 +43,20 @@ const StyledButton = styled.button`
 `;
 
 // * Componente Botón *
-const Button = ({ onClick, children, variant = "primary" }) => {
-  const handleClick = (e) => {
-    if (onClick) {
-      e.preventDefault();
-      onClick();
-    }
-    // Si no hay onClick, no hacemos preventDefault para permitir el comportamiento normal del Link
-  };
+const Button = ({ onClick, to, children, variant = "primary" }) => {
+  // Si hay "to", renderiza como Link
+  if (to) {
+    return (
+      <StyledButton as={Link} to={to} $variant={variant}>
+        {children}
+      </StyledButton>
+    );
+  }
 
+  // Si no, renderiza como botón normal
   return (
-    <StyledButton onClick={handleClick} $variant={variant}>
-      {onClick ? children : <a>{children}</a>}
+    <StyledButton onClick={onClick} $variant={variant}>
+      {children}
     </StyledButton>
   );
 };

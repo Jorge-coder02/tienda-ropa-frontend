@@ -10,8 +10,8 @@ API propia de donde se proveen artículos
 
 # Home
 
+    - Animación en títulos de que se va escribiendo y se queda al final I
     - Vídeo de fondo o imagen
-    - Más abajo algo como: Conoce tu estilo... y 3 fotos (estilos)
 
 # Catálogo
 
@@ -33,4 +33,4 @@ API propia de donde se proveen artículos
     - Cambiar paleta (tailwind.config) (configurar ciertos colores de la paleta)
     - Componentes cargando con fondo gris mientras carga
     - Foto alternativa de cada prenda (en bbdd otro campo más) para cambiar en ProductDetail
-    - Componente para títulos <Titulo> (para evitar repetir text-center font...)
+    - Componente sección ?
