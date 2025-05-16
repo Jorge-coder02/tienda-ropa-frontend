@@ -3,7 +3,7 @@ import ItemEstilo from "../../PageComps/home/ItemEstilo";
 function Estilos() {
   return (
     <section className="min-h-[80dvh] flex flex-col gap-y-12 justify-center items-center py-32 px-6 bg-[#f3f3f3]">
-      <div className="max-w-[50%]">
+      <div className="lg:max-w-[50%]">
         <Titulo variant="secondary" duration={1.6} steps={25}>
           CONOCE TU ESTILO
         </Titulo>

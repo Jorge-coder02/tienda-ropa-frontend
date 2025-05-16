@@ -5,3 +5,15 @@
 body {
   background-color: #fff;
 }
+
+/* Estilo para cualquier texto seleccionado */
+::selection {
+  background: #d6672d; /* Color de fondo */
+  color: white; /* Color del texto */
+}
+
+/* Para navegadores WebKit (Chrome, Safari) */
+::-moz-selection {
+  background: #d6672d;
+  color: white;
+}
