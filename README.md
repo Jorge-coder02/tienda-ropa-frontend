@@ -1,9 +1,9 @@
 # 📌🎨 Devflix (Cartelera películas)
 
-[![Devflix](https://img.shields.io/badge/Status-Complete-green)](https://github.com/Jorge-coder02/dexflix-frontend)
+[![Urbanwearx](https://img.shields.io/badge/Status-Complete-green)](https://github.com/Jorge-coder02/tienda-ropa-frontend)
 [![Licencia](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
-🔗 **Visitar:** [Ver en vivo](https://dexflixcinema.netlify.app/)
+🔗 **Visitar:** [Ver en vivo](https://urbanwearx.netlify.app/)
 
 ## 🚀 Tecnologías Principales
 
@@ -15,8 +15,11 @@
 
 ## ✨ Características Destacadas
 
-- ✅ Optimización automática de imágenes (WebP)
-- ✅ Loading spinner de carga en peticiones al back
+- ✅ API propia de donde se proveen los productos
+- ✅ UpTimeRobot: Monitorear el estado del backend
+- ✅ Cloudinary: Alojar fotos de la API
+- ✅ Optimización de imágenes (WebP)
+- ✅ Loading spinner de carga entre páginas y peticiones al backend
 - ✅ Diseño responsive con Tailwind CSS
 
 ## 📦 Instalación
@@ -24,8 +27,8 @@
 1. **Clonar el repositorio**
 
 ```bash
-git clone https://github.com/Jorge-coder02/devflix-frontend.git
-cd devflix-frontend
+git clone https://github.com/Jorge-coder02/tienda-ropa-frontend.git
+cd tienda-ropa-frontend
 ```
 
 2. **Instalar dependencias**
@@ -54,23 +57,26 @@ npm run dev
 
 ```plaintext
 📦 root
-├── 📁 public/
-│   ├── 📁 images/         # Imágenes globales
-│   └── 📁 fonts/          # Fuentes personalizadas
+├── 📁 public/                  # Archivos públicos accesibles
+│   └── 📁 img/
+│       ├── 📁 icons/
+│       ├── 📁 outfits/
+│       ├── 📁 ropa/
+│       ├── 📁 socials/
 │
 ├── 📁 src/
 │   ├── 📁 components/
-│   │
-│   ├── 📁 features/
-│   │
-│   ├── 📁 hooks/
-│   │   ├── useAuth.jsx     # Hook de autenticación
-│   │
-│   └── 📁 pages/          # React Router
+│   ├── 📁 layout/              # Estructuras de diseño
+│   ├── 📁 pages/
+│   ├── 📁 routes/
+│   ├── 📁 store/               # Almacenamiento global (Redux Toolkit)
+│   ├── 📁 utility/             # Módulos o funcionalidades específicas
 │
-├── ⚙️ .env.local         # Variables locales (gitignore)
-├── 🎨 tailwind.config.js # Configuración de Tailwind
-└── 📜 README.md          # Archivo que estás leyendo
+├── ⚙️  .env                    # Variables de entorno (ignorado por Git)
+├── 🎨 tailwind.config.js
+├── 📜 README.md                # Documentación principal del proyecto
+└── 📜 todo.md                  # Lista de tareas pendientes
+
 ```
 
 # Versiones
@@ -91,9 +97,3 @@ npm run dev
 
 - eslint: `9.25.0`
 - postcss: `8.4.21`
-
-### Otras tecnologías usadas:
-
-UpTimeRobot: Monitorear el backend
-Cloudinary: Alojar fotos de la API
-API propia de donde se proveen los productos
