@@ -1,4 +1,4 @@
-# 📌🎨 Devflix (Cartelera películas)
+# 📌🎨 UrbanwearX (Tienda de ropa)
 
 [![Urbanwearx](https://img.shields.io/badge/Status-Complete-green)](https://github.com/Jorge-coder02/tienda-ropa-frontend)
 [![Licencia](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
