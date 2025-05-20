@@ -28,7 +28,7 @@ function Catalogo() {
     };
 
     fetchProductos();
-  }, []);
+  }, [genero]);
 
   return (
     <Layout>
