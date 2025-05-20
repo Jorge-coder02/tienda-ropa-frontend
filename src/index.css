@@ -6,6 +6,9 @@ body {
   background-color: #fff;
 }
 
+/* Paleta de colores a implementar */
+/* #101a49 -> azul oscuro - botones*/
+
 /* Estilo para cualquier texto seleccionado */
 ::selection {
   background: #d6672d; /* Color de fondo */

@@ -2,9 +2,6 @@
 
 # Home
 
-    - Animación en títulos de que se va escribiendo y se queda al final I
-    - Vídeo de fondo o imagen
-
 # Catálogo
 
     - Añadir atributo en bbdd de genero (posibilidad de ambos/unisex?)
