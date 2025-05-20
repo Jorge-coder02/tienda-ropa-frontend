@@ -4,8 +4,6 @@
 
 # Catálogo
 
-    - Implementar ropa hombre/mujer (campo género y endpoint de cada, por defecto hombre al cargar catálogo)
-    - Barra género se actualice según selección
     - Filtrar productos
     - optimizar carga imágenes catálogo?
     - paginación catálogo

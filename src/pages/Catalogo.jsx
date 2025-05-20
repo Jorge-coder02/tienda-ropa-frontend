@@ -13,14 +13,10 @@ function Catalogo() {
   }, [genero]);
 
   // 🚀 Petición inicial productos al back
-  /* Crear un endpoint en backend con /productos/:genero  -> cuidado no haya colisión
-    { genero } = req.params
-     find({genero: hombre})
-  */
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await api.get(`/productos/${genero}`); // hacer la petición de productos a un género específico
+        const response = await api.get(`/productos/genero/${genero}`); // hacer la petición de productos a un género específico
         setProductos(response.data);
       } catch (err) {
         console.error("Error al obtener productos:", err);
@@ -46,7 +42,7 @@ function Catalogo() {
                   genero === "hombre" && "font-semibold"
                 } cursor-pointer`}
                 type="button"
-                value="MEN"
+                value="HOMBRE"
               />
               <span className="">|</span> {/* se cambia a bold con Mujer */}
               <input
@@ -55,7 +51,7 @@ function Catalogo() {
                   genero === "mujer" && "font-semibold"
                 } cursor-pointer`}
                 type="button"
-                value="WOMEN"
+                value="MUJER"
               />
             </nav>
             {/* Barra filtro 🔎 */}
