@@ -4,7 +4,6 @@
 
 # Catálogo
 
-    - Añadir atributo en bbdd de genero (posibilidad de ambos/unisex?)
     - Implementar ropa hombre/mujer (campo género y endpoint de cada, por defecto hombre al cargar catálogo)
     - Barra género se actualice según selección
     - Filtrar productos

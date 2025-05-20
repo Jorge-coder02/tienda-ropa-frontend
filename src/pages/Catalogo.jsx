@@ -20,7 +20,7 @@ function Catalogo() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await api.get(`/productos${genero}`); // hacer la petición de productos a un género específico
+        const response = await api.get(`/productos/${genero}`); // hacer la petición de productos a un género específico
         setProductos(response.data);
       } catch (err) {
         console.error("Error al obtener productos:", err);
