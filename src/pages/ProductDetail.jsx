@@ -18,7 +18,7 @@ import Button from "../components/ui/btn/Button.styles";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 
 export default function ProductDetail() {
-  const API_URL = import.meta.env.VITE_API_URL;
+  // const API_URL = import.meta.env.VITE_API_URL;
   const { slug } = useParams(); // recojo de ItemProducto.jsx el .slug del producto pulsado
   const dispatch = useDispatch();
   const [cargando, setCargando] = useState(true);
@@ -52,20 +52,23 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchProducto = async () => {
       try {
-        const res = await api.get(
-          `/productos/relacionados?categoria=${categoria}&genero=${genero}`
-        );
+        const res = await api.get("/productos/relacionados", {
+          // Quita el ?categoria=...
+          params: {
+            // Usa el sistema de params de Axios
+            categoria,
+            genero,
+            excludeId: producto._id, // Añade esto si necesitas excluir un ID
+          },
+        });
         setProductosRelacionados(res.data);
       } catch (error) {
         console.error("Error al cargar productos relacionados:", error);
       }
     };
 
-    if (categoria && genero) {
-      // Asegúrate de que ambos valores estén definidos
-      fetchProducto();
-    }
-  }, [categoria, genero]); // Dependencias: categoria y genero
+    if (categoria && genero) fetchProducto();
+  }, [categoria, genero, producto?._id]); // Añade producto?._id para evitar el error de undefined
 
   if (cargando) return <LoadingSpinner />; // Esto no parece estar funcionando
   if (!producto) return <p>Producto no encontrado</p>;
