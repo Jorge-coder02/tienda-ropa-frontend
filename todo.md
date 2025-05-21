@@ -1,17 +1,14 @@
 ### 🟡 Funcionalidades pendientes:
 
-# Home
+    - problema uptimerobot no mantiene fresca la página de un día a otro
 
 # Catálogo
 
-    - añadir nuevos productos género
-    - Filtrar productos
+    - Filtrar productos (se mantengan)
     - optimizar carga imágenes catálogo?
     - paginación catálogo
 
 # Producto
-
-    - Quitar el elemento actual de los relacionados
 
 # Carrito
 

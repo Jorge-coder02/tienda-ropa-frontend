@@ -1,10 +1,8 @@
-// En este componente se va a mostrar el detalle de un producto
-// y se va a poder añadir al carrito
 // Funcionamiento: se hace una peticion al backend con el slug del producto
 // y se muestra el detalle del producto. La ruta se ha creado dinámicamente
 
-// Para productos relacionados, se hace una petición al backend con la categoría
-// del producto (slug.categoria). **Pero con lazy loading**
+// Para productos relacionados, se hace una petición al backend con la categoría y género
+// del producto (slug.categoria y genero). **meter con lazy loading**
 
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
@@ -18,7 +16,6 @@ import Button from "../components/ui/btn/Button.styles";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 
 export default function ProductDetail() {
-  // const API_URL = import.meta.env.VITE_API_URL;
   const { slug } = useParams(); // recojo de ItemProducto.jsx el .slug del producto pulsado
   const dispatch = useDispatch();
   const [cargando, setCargando] = useState(true);
@@ -53,12 +50,10 @@ export default function ProductDetail() {
     const fetchProducto = async () => {
       try {
         const res = await api.get("/productos/relacionados", {
-          // Quita el ?categoria=...
           params: {
-            // Usa el sistema de params de Axios
             categoria,
             genero,
-            excludeId: producto._id, // Añade esto si necesitas excluir un ID
+            excludeId: producto._id, // excluir un ID
           },
         });
         setProductosRelacionados(res.data);

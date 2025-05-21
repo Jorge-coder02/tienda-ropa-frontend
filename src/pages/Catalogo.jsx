@@ -2,15 +2,29 @@ import Layout from "../layout/Layout";
 import ItemProducto from "../components/ui/PageComps/catalogo/ItemProducto";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setGenero } from "../store/filtroSlice";
 
 function Catalogo() {
+  const dispatch = useDispatch();
+  const genero = useSelector((state) => state.filtros.filtros.genero);
+  const scrollPosition = useSelector(
+    (state) => state.filtros.filtros.scrollPosition
+  );
+
   const [productos, setProductos] = useState([]);
 
-  const [genero, setGenero] = useState("hombre"); // estado para género de productos seleccionado
-
+  // 1º Mover scroll a la posición guardada en Redux
   useEffect(() => {
-    console.log("Género actual: ", genero);
-  }, [genero]);
+    if (scrollPosition) {
+      // Esperar a que el contenido esté renderizado antes de hacer scroll
+      const timeoutId = setTimeout(() => {
+        window.scrollTo({ top: scrollPosition, behavior: "smooth" });
+      }, 200);
+
+      return () => clearTimeout(timeoutId); // Limpia timeout si el componente desmonta
+    }
+  }, [scrollPosition]);
 
   // 🚀 Petición inicial productos al back
   useEffect(() => {
@@ -37,7 +51,7 @@ function Catalogo() {
             {/* Contenedor género 👫 */}
             <nav className="flex flex-wrap justify-center items-center gap-x-2">
               <input
-                onClick={() => setGenero("hombre")}
+                onClick={() => dispatch(setGenero("hombre"))}
                 className={`${
                   genero === "hombre" && "font-semibold"
                 } cursor-pointer`}
@@ -46,7 +60,7 @@ function Catalogo() {
               />
               <span className="">|</span> {/* se cambia a bold con Mujer */}
               <input
-                onClick={() => setGenero("mujer")}
+                onClick={() => dispatch(setGenero("mujer"))}
                 className={`${
                   genero === "mujer" && "font-semibold"
                 } cursor-pointer`}
