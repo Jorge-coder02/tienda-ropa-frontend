@@ -4,6 +4,7 @@
 
 # Catálogo
 
+    - añadir nuevos productos género
     - Filtrar productos
     - optimizar carga imágenes catálogo?
     - paginación catálogo
