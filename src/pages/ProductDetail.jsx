@@ -26,6 +26,7 @@ export default function ProductDetail() {
   const [producto, setProducto] = useState(null);
   // Productos relacionados
   const [categoria, setCategoria] = useState(""); // Para productos relacionados
+  const [genero, setGenero] = useState(""); // Para productos relacionados
   const [productosRelacionados, setProductosRelacionados] = useState(null); // productos relacionados
 
   // Petición GET producto
@@ -36,6 +37,7 @@ export default function ProductDetail() {
         const res = await api.get(`/productos/${slug}`); // ...productos/slug-123 -> backend responde
         setProducto(res.data);
         setCategoria(res.data.categoria); // Para productos relacionados
+        setGenero(res.data.genero); // Para productos relacionados
       } catch (error) {
         console.error("Error al cargar el producto:", error);
       } finally {
@@ -50,19 +52,20 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchProducto = async () => {
       try {
-        console.log(categoria);
-        const res = await api.get(`/productos/categoria/${categoria}`); // ...products/categoria/'pantalones'
+        const res = await api.get(
+          `/productos/relacionados?categoria=${categoria}&genero=${genero}`
+        );
         setProductosRelacionados(res.data);
       } catch (error) {
-        console.error("Error al cargar el producto:", error);
-      } finally {
-        setCargando(false);
-        // console.log("Prod: ", productosRelacionados);
+        console.error("Error al cargar productos relacionados:", error);
       }
     };
 
-    fetchProducto();
-  }, [categoria]);
+    if (categoria && genero) {
+      // Asegúrate de que ambos valores estén definidos
+      fetchProducto();
+    }
+  }, [categoria, genero]); // Dependencias: categoria y genero
 
   if (cargando) return <LoadingSpinner />; // Esto no parece estar funcionando
   if (!producto) return <p>Producto no encontrado</p>;
