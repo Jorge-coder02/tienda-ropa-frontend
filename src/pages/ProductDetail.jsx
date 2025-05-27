@@ -6,25 +6,22 @@
 
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-// Redux
-import { useDispatch } from "react-redux";
-import { addToCart } from "../store/cartSlice";
 import api from "../api/axios";
 // Componentes
 import Layout from "../layout/Layout";
 import Button from "../components/ui/btn/Button.styles";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+import useAddToCart from "../utility/useAddToCart";
 
 export default function ProductDetail() {
   const { slug } = useParams(); // recojo de ItemProducto.jsx el .slug del producto pulsado
-  const dispatch = useDispatch();
   const [cargando, setCargando] = useState(true);
-
   const [producto, setProducto] = useState(null);
   // Productos relacionados
   const [categoria, setCategoria] = useState(""); // Para productos relacionados
   const [genero, setGenero] = useState(""); // Para productos relacionados
   const [productosRelacionados, setProductosRelacionados] = useState(null); // productos relacionados
+  const { addedToCart, handleAddToCart } = useAddToCart();
 
   // Petición GET producto
   useEffect(() => {
@@ -87,8 +84,12 @@ export default function ProductDetail() {
               </div>
               <p>{producto.descripcion}</p>
               <div className="flex justify-center items-center gap-x-4 mt-6">
-                <Button onClick={() => dispatch(addToCart(producto))}>
-                  Añadir al carrito 🛒
+                <Button
+                  disabled={addedToCart} // Deshabilita el botón si ya se ha añadido
+                  onClick={() => handleAddToCart(producto)}
+                  className="mt-4"
+                >
+                  {addedToCart ? "¡Añadido!" : "Añadir 🛒"}
                 </Button>
               </div>
             </div>
