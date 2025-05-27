@@ -15,24 +15,25 @@ const variantHoverColors = {
 };
 
 const StyledButton = styled.button`
-  background: ${(props) => variantColors[props.$variant || "primary"]};
-  color: white;
+  background: ${(props) =>
+    props.disabled ? "#ccc" : variantColors[props.$variant || "primary"]};
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   font-weight: bold;
-  color: #ffffff;
   padding: 0.6rem 1.8rem;
   font-size: 16px;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   transition: all 0.3s ease;
 
   &:hover {
-    background: ${(props) => variantHoverColors[props.$variant]};
-    transform: translateY(-4px);
+    background: ${(props) =>
+      props.disabled ? "#ccc" : variantHoverColors[props.$variant]};
+    transform: ${(props) => (props.disabled ? "none" : "translateY(-4px)")};
   }
 
   &:active {
-    transform: translateY(0);
+    transform: ${(props) => (props.disabled ? "none" : "translateY(0)")};
     transition: transform 0.2s ease;
   }
 
@@ -43,11 +44,17 @@ const StyledButton = styled.button`
 `;
 
 // * Componente Botón *
-const Button = ({ onClick, to, children, variant = "primary" }) => {
+const Button = ({
+  onClick,
+  to,
+  children,
+  variant = "primary",
+  disabled = false,
+}) => {
   // Si hay "to", renderiza como Link
   if (to) {
     return (
-      <StyledButton as={Link} to={to} $variant={variant}>
+      <StyledButton as={Link} to={to} $variant={variant} disabled={disabled}>
         {children}
       </StyledButton>
     );
@@ -55,7 +62,7 @@ const Button = ({ onClick, to, children, variant = "primary" }) => {
 
   // Si no, renderiza como botón normal
   return (
-    <StyledButton onClick={onClick} $variant={variant}>
+    <StyledButton onClick={onClick} $variant={variant} disabled={disabled}>
       {children}
     </StyledButton>
   );

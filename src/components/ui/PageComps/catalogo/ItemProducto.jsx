@@ -1,16 +1,26 @@
 import Button from "../../btn/Button.styles";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../../store/cartSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { setScrollPosition } from "../../../../store/filtroSlice"; // 👈 Importa esto
 
 function ItemProducto({ objeto_prod, nombre, precio, imagen }) {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Uso esto en lugar del <Link>
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const handleClick = () => {
     dispatch(setScrollPosition(window.scrollY)); // Guarda scroll actual primero
     navigate(`/productos/${objeto_prod.slug}`); // Navega después
+  };
+
+  const handleAddToCart = (objeto_prod) => {
+    setAddedToCart(true); // Cambia el estado para mostrar animación
+    setTimeout(() => {
+      setAddedToCart(false); // Resetea el estado después de 2 segundos
+    }, 1500);
+    dispatch(addToCart(objeto_prod));
   };
 
   return (
@@ -34,8 +44,12 @@ function ItemProducto({ objeto_prod, nombre, precio, imagen }) {
       </div>
 
       {/* Botón separado */}
-      <Button onClick={() => dispatch(addToCart(objeto_prod))} className="mt-4">
-        Añadir 🛒
+      <Button
+        disabled={addedToCart} // Deshabilita el botón si ya se ha añadido
+        onClick={() => handleAddToCart(objeto_prod)}
+        className="mt-4"
+      >
+        {addedToCart ? "¡Añadido!" : "Añadir 🛒"}
       </Button>
     </div>
   );
