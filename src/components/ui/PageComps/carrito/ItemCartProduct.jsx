@@ -20,58 +20,50 @@ function ItemCartProduct({ item }) {
     // Contenedor principal
     <div
       key={item._id}
-      className="flex gap-x-8 lg:gap-x-0 border- border-gray-200 rounded-lg px-4 
-      w-full lg:w-[80%] py-2 items-center justify-between"
+      className="flex gap-x-8 lg:flex-row flex-col border-gray-200 rounded-lg px-4 
+  w-full lg:w-[80%] py-4 items-center justify-between"
     >
-      {/* Contenedor izquierda */}
-      <div className="flex flex-[4] lg:flex-row flex-col gap-x-8 items-center justify-between">
-        <div className="flex gap-x-3 justify-center items-center">
-          {/* imagen */}
-          <Link
-            className="object-contain w-16 h-16 hover:underline"
-            to={`/productos/${item.slug}`}
-          >
-            <img
-              src={item.imagen}
-              alt={item.nombre}
-              className="p-2 bg-slate-100 hover:bg-slate-200 rounded-lg w-full h-full object-cover transition duration-100 ease-in-out"
-            />{" "}
+      {/* Parte izquierda */}
+      <div className="flex items-center gap-x-4 w-full lg:w-auto">
+        {/* Imagen (cuadro fijo y centrado) */}
+        <Link
+          to={`/productos/${item.slug}`}
+          className="w-14 h-14 bg-slate-100 hover:bg-slate-200 rounded-lg overflow-hidden flex items-center justify-center shrink-0"
+        >
+          <img
+            src={item.imagen}
+            alt={item.nombre}
+            className="object-contain w-full h-full"
+          />
+        </Link>
+
+        {/* Info producto */}
+        <div className="flex flex-col justify-center gap-y-1">
+          <Link className="hover:underline" to={`/productos/${item.slug}`}>
+            <h3 className="font-semibold">{item.nombre}</h3>
           </Link>
-          {/* info */}
-          <div className="flex flex-col gap-y-1">
-            <Link className="hover:underline" to={`/productos/${item.slug}`}>
-              <h3 className="font-semibold">{item.nombre}</h3>
-            </Link>
-            <p className="text-sm text-gray-500">
-              unidad: {item.precio.toFixed(2)}€
-            </p>
-          </div>
+          <p className="text-sm text-gray-500">
+            unidad: {item.precio.toFixed(2)}€
+          </p>
         </div>
       </div>
 
-      {/* Contenedor derecha */}
-      <div className="flex flex-[1] lg:pl-20 flex-col gap-y-2 w-full h-full items-start justify-center">
-        {/* Cantidad */}
-        <div className="flex items-center gap-x-2">
+      {/* Parte derecha (cantidad) */}
+      <div className="flex flex-col gap-y-2 items-center justify-center mt-4 lg:mt-0">
+        <div className="flex justify-center items-center gap-x-2">
           <button
             onClick={() => dispatch(removeOneFromCart(item._id))}
             className="w-8 h-8 rounded-full border text-center text-lg font-semibold bg-[#f5f5f5] hover:bg-[#e0e0e0]"
-            aria-label="Remove one item from cart"
-            type="button"
           >
             -
           </button>
           <p className="text-sm">{item.quantity}</p>
-          <div className="flex justify-center items-center gap-x-1">
-            <button
-              onClick={() => dispatch(addOneToCart(item._id))}
-              className="w-8 h-8 rounded-full border text-center text-lg font-semibold bg-[#f5f5f5] hover:bg-[#e0e0e0]"
-              aria-label="Add one item to cart"
-              type="button"
-            >
-              +
-            </button>
-          </div>
+          <button
+            onClick={() => dispatch(addOneToCart(item._id))}
+            className="w-8 h-8 rounded-full border text-center text-lg font-semibold bg-[#f5f5f5] hover:bg-[#e0e0e0]"
+          >
+            +
+          </button>
         </div>
       </div>
     </div>

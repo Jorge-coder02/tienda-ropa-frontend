@@ -62,10 +62,10 @@ const Cart = () => {
               </div>
 
               {/* Resumen */}
-              <div className="flex flex-col gap-y-8 items-center justify-center w-full p-8">
+              <div className="flex flex-col gap-y-12 items-center justify-center w-full p-8">
                 <h2 className="text-3xl font-semibold text-center">Resumen</h2>
                 {/* Contenedor */}
-                <div className="flex flex-col gap-y-3 items-center justify-between w-[70%] border-">
+                <div className="flex flex-col gap-y-4 items-center justify-between w-[70%] border-">
                   <div className="flex flex- gap-y-2 items-center justify-between w-full border-b-2">
                     <span className="text-gray-500">Subtotal </span>
                     <span>{totalPrice.toFixed(2)}€</span>
