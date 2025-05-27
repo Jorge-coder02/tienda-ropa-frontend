@@ -74,7 +74,7 @@ const Cart = () => {
                     <span className="text-gray-500">Envío </span>
                     <span>Gratis</span>
                   </div>
-                  <div className="flex flex- gap-y-2 items-center justify-between w-full border-b-2">
+                  <div className="flex flex- gap-y-2 items-center justify-between w-full border-b-2 font-semibold">
                     <span className="text-gray-500">Total </span>
                     <span>{totalPrice.toFixed(2)}€</span>
                   </div>
