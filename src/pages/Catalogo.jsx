@@ -13,6 +13,7 @@ function Catalogo() {
   );
 
   const [productos, setProductos] = useState([]);
+  const [filtroSelect, setFiltroSelect] = useState("all");
 
   // 1º Mover scroll a la posición guardada en Redux
   useEffect(() => {
@@ -26,7 +27,7 @@ function Catalogo() {
     }
   }, [scrollPosition]);
 
-  // 🚀 Petición inicial productos al back
+  // 🚀 Petición inicial productos, también cuando género cambia
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -39,6 +40,24 @@ function Catalogo() {
 
     fetchProductos();
   }, [genero]);
+
+  // 🚀📌 Consulta de filtro
+  const handleClickFiltro = () => {
+    // Consulta al backend con el filtro seleccionado
+    api
+      .get(`/productos/filtro`, {
+        params: {
+          genero,
+          categoria: filtroSelect === "all" ? "" : filtroSelect, // Si es "all", no se filtra por categoría
+        },
+      })
+      .then((response) => {
+        setProductos(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener productos filtrados:", error);
+      });
+  };
 
   return (
     <Layout>
@@ -68,22 +87,39 @@ function Catalogo() {
                 value="MUJER"
               />
             </nav>
-            {/* Barra filtro 🔎 */}
+            {/* Barra filtro 🔎 *posibilidad de hacer una consulta para ver que categorías hay */}
             <nav className="flex flex-wrap justify-center items-center gap-x-2">
+              <select
+                value={filtroSelect}
+                onChange={(e) => {
+                  setFiltroSelect(e.target.value);
+                }}
+                className="py-1 px-2 rounded-lg bg-[#f5f4f4]"
+              >
+                <option value="all">Todas las categorías</option>
+                <option value="camisetas">Camisetas</option>
+                <option value="pantalones">Pantalones</option>
+                <option value="zapatillas">Zapatillas</option>
+              </select>
               <input
-                className="bg-[#f5f4f4] py-1 rounded-lg px-4"
-                type="text"
-                placeholder="Filtro"
-              />
-              <input
+                onClick={handleClickFiltro} // Aquí puedes implementar la lógica de búsqueda
                 className="bg-[#f5f4f4] p-1 cursor-pointer rounded-lg"
                 type="button"
                 value="🔎"
               />
             </nav>
           </div>
-          {/* Catálogo productos 👚 */}
+          {/* ❌ Si no hay productos */}
+          {productos.length === 0 && (
+            <div className="flex flex-col justify-center items-center w-full">
+              <p className="text-center text-lg font-semibold">
+                No hay productos disponibles en esta categoría 😢
+              </p>
+            </div>
+          )}
+          {/* 👚 Catálogo productos */}
           <div className="grid gap-8 2xl:grid-cols-3 lg:grid-cols-2 justify-center items-center flex-wrap">
+            {/* Si hay productos */}
             {productos.map((prod) => (
               <ItemProducto
                 key={prod._id}

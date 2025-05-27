@@ -1,6 +1,6 @@
 ### 🟡 Funcionalidades pendientes:
 
-    - problema uptimerobot no mantiene fresca la página de un día a otro
+    - problema uptimerobot no mantiene fresca la página de un día a otro?
 
 # Catálogo
 
