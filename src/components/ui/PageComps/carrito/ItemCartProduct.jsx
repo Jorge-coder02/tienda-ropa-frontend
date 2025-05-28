@@ -20,8 +20,8 @@ function ItemCartProduct({ item }) {
     // Contenedor principal
     <div
       key={item._id}
-      className="flex gap-x-8 lg:flex-row flex-col border-gray-200 rounded-lg px-4 
-  w-full lg:w-[80%] py-4 items-center justify-between"
+      className="flex gap-x-8 lg:flex-row flex-col border-gray-200 rounded-lg px-4 py-4
+  w-full lg:w-[80%] items-center justify-between"
     >
       {/* Parte izquierda */}
       <div className="flex items-center gap-x-4 w-full lg:w-auto">

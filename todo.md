@@ -4,8 +4,7 @@
 
 # Catálogo
 
-    - Filtrar productos (se mantengan)
-    - optimizar carga imágenes catálogo?
+    - optimizar carga imágenes catálogo
     - paginación catálogo
 
 # Producto
