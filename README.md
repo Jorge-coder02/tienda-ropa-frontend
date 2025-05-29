@@ -8,7 +8,7 @@
 ## 🚀 Tecnologías Principales
 
 ![React](https://img.shields.io/badge/React-19.0.0-61DAFB?logo=react)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-06B6D4?logo=tailwind-css)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.3.3-06B6D4?logo=tailwind-css)
 ![Node.js](https://img.shields.io/badge/Node.js-20.14.0-339933?logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-4.18.2-000000?logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-7.0.8-47A248?logo=mongodb&logoColor=white)
