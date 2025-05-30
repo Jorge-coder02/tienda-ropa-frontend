@@ -6,12 +6,14 @@ const variantColors = {
   primary: "#60a5fa",
   secondary: "#d6672d",
   tertiary: "#a78bfa",
+  delete: "#ff6f6f",
 };
 
 const variantHoverColors = {
   primary: "#20a5fa",
   secondary: "#ea580c",
   tertiary: "#8b5cf6",
+  delete: "#ff4343",
 };
 
 const StyledButton = styled.button`

@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import Layout from "../layout/Layout";
 import Button from "../components/ui/btn/Button.styles";
 import ItemCartProduct from "../components/ui/PageComps/carrito/ItemCartProduct";
+import { clearCart } from "../store/cartSlice";
+import { useDispatch } from "react-redux";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
 
   // bien esto aquíi sin effect?
   const totalPrice = cartItems.reduce(
@@ -59,6 +62,18 @@ const Cart = () => {
                 {cartItems.map((item) => (
                   <ItemCartProduct key={item._id} item={item} />
                 ))}
+                <Button
+                  variant="delete"
+                  onClick={() => {
+                    if (
+                      window.confirm("¿Seguro que deseas vaciar tu carrito?")
+                    ) {
+                      dispatch(clearCart()); // El usuario hace clic en "Aceptar" (Sí)
+                    }
+                  }}
+                >
+                  Vaciar carrito
+                </Button>
               </div>
 
               {/* Resumen */}

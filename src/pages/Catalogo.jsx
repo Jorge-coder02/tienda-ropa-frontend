@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setGenero } from "../store/filtroSlice";
+import ProductSkeleton from "../utility/ProductSkeleton";
+import CategorySkeleton from "../utility/CategorySkeleton";
 
 function Catalogo() {
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ function Catalogo() {
 
   const [productos, setProductos] = useState([]);
   const [filtroSelect, setFiltroSelect] = useState("all");
+  const [loading, setLoading] = useState(true);
 
   // 1º Mover scroll a la posición guardada en Redux
   useEffect(() => {
@@ -31,10 +34,13 @@ function Catalogo() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
+        setLoading(true);
         const response = await api.get(`/productos/genero/${genero}`); // hacer la petición de productos a un género específico
         setProductos(response.data);
       } catch (err) {
         console.error("Error al obtener productos:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -63,6 +69,7 @@ function Catalogo() {
     <Layout>
       <div className="min-h-[calc(100dvh-76px)] flex flex-col gap-y-8 items-center lg:pt-20 pt-10">
         <h1 className="text-4xl font-semibold text-center">Catálogo</h1>
+
         {/* Contenedor principal */}
         <div className="flex flex-col justify-center gap-y-12 lg:w-[50%]">
           {/* Barra género - filtros */}
@@ -110,7 +117,7 @@ function Catalogo() {
             </nav>
           </div>
           {/* ❌ Si no hay productos */}
-          {productos.length === 0 && (
+          {productos.length === 0 && !loading && (
             <div className="flex flex-col justify-center items-center w-full">
               <p className="text-center text-lg font-semibold">
                 No hay productos disponibles en esta categoría 😢
@@ -120,15 +127,19 @@ function Catalogo() {
           {/* 👚 Catálogo productos */}
           <div className="grid gap-8 2xl:grid-cols-3 lg:grid-cols-2 justify-center items-center flex-wrap">
             {/* Si hay productos */}
-            {productos.map((prod) => (
-              <ItemProducto
-                key={prod._id}
-                objeto_prod={prod} // Enviamos el objeto completo para el dispatch
-                nombre={prod.nombre}
-                imagen={prod.imagen}
-                precio={prod.precio}
-              ></ItemProducto>
-            ))}
+            {loading
+              ? Array(6)
+                  .fill(null)
+                  .map((_, i) => <ProductSkeleton key={i} />)
+              : productos.map((prod) => (
+                  <ItemProducto
+                    key={prod._id}
+                    objeto_prod={prod} // Enviamos el objeto completo para el dispatch
+                    nombre={prod.nombre}
+                    imagen={prod.imagen}
+                    precio={prod.precio}
+                  />
+                ))}
           </div>
         </div>
       </div>
