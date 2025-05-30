@@ -15,12 +15,12 @@
 
 ## ✨ Características Destacadas
 
-- ✅ API propia de donde se proveen los productos
-- ✅ UpTimeRobot: Monitorear el estado del backend
-- ✅ Cloudinary: Alojar fotos de la API
-- ✅ Optimización de imágenes (WebP)
-- ✅ Loading spinner de carga entre páginas y peticiones al backend
-- ✅ Diseño responsive con Tailwind CSS
+- ✅👚 API propia de donde se proveen los productos
+- ✅🤖 UpTimeRobot: Monitorear el estado del backend
+- ✅☁ Cloudinary: Alojar fotos de la API
+- ✅🦴 Skeleton loading para carga dinámica de peticiones al backend.
+- ✅🔄 Loading spinner para carga entre páginas.
+- ✅🖼 Optimización de imágenes (WebP)
 
 ## 📦 Instalación
 
