@@ -5,7 +5,8 @@ import api from "../api/axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setGenero } from "../store/filtroSlice";
 import ProductSkeleton from "../utility/ProductSkeleton";
-import CategorySkeleton from "../utility/CategorySkeleton";
+// import CategorySkeleton from "../utility/CategorySkeleton";
+// en el futuro usar categoryskeleton
 
 function Catalogo() {
   const dispatch = useDispatch();
