@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ProductsContent from "./products/ProductsContent";
 import ListProduct from "./products/ListProduct";
-// import AddProduct from "./products/AddProduct"
+import AddProduct from "./products/AddProduct";
 
 function Products() {
   const [view, setView] = useState("menu");
@@ -10,7 +10,7 @@ function Products() {
   const views = {
     menu: <ProductsContent />,
     listProducts: <ListProduct />,
-    // addProducts: <AddProducts />,
+    addProducts: <AddProduct />,
   };
 
   return (
@@ -24,7 +24,7 @@ function Products() {
             onClick={() => setView("listProducts")}
             className="hover:bg-slate-50 p-2 rounded cursor-pointer"
           >
-            📦 Ver todos los productos
+            👚 Ver todos los productos
           </li>
           <li
             onClick={() => setView("addProducts")}
@@ -32,9 +32,6 @@ function Products() {
           >
             ➕ Añadir nuevo producto
           </li>
-          {/* <li className="hover:bg-slate-50 p-2 rounded cursor-pointer">
-            📈 Ver estadísticas
-          </li> */}
         </ul>
       </div>
 

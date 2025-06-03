@@ -96,9 +96,8 @@ function Header() {
         </nav>
         {/* Derecha */}
         <nav className=" lg:block">
-          <Link to={"/"}>🔎</Link>
           <Link to={"/"}>👤</Link>
-          <Link to={"/"}>💙</Link>
+          <Link to={"/admin"}>🔨</Link>
           <Link to={"/carrito"}>
             <span>🛒</span>
             <span>{totalQuantity}</span>

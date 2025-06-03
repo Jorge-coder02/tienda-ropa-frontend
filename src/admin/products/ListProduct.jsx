@@ -2,9 +2,13 @@
 // Este componente realiza una petición a la API y muestra todos los productos.
 // Menú CRUD que permite editar/eliminar productos
 
+// Posibles mejoras: Editar producto -> hacer una segunda copia del producto para compararla
+// al confirmar y ver si hay cambios antes del fetch
+
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
 import Button from "../ui/Button";
+import LoadingSpinner from "../../components/ui/LoadingSpinner2";
 
 function ListProduct() {
   const [productos, setProductos] = useState([]); // guardo productos
@@ -16,7 +20,7 @@ function ListProduct() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        setLoading(true);
+        setLoading(true); // *** sacar atrás
         const response = await api.get(`/productos`);
         setProductos(response.data);
       } catch (err) {
@@ -37,7 +41,7 @@ function ListProduct() {
     if (respuesta) {
       const { _id } = prod;
       try {
-        setLoading(true);
+        setLoading(true); // *** acar atrás
         const res = await api.delete(`/productos/${_id}`);
         setProductos((prev) => prev.filter((prod) => prod._id !== _id));
       } catch (err) {
@@ -50,46 +54,33 @@ function ListProduct() {
 
   // 🔄 Modo edición
   const handleEditProduct = (prod) => {
-    const { _id, nombre, slug, precio } = prod;
-    console.log("Modo edición");
+    const { _id, nombre, stock, precio } = prod;
     setEditingProductId(_id); // guardo producto id que estoy editando
-    setEditableValues({ nombre, slug, precio }); // guardo los valores actuales del producto
+    setEditableValues({ nombre, stock, precio }); // guardo los valores actuales del producto
   };
 
   // 🚀🔄 Confirmar cambios
   const handleConfirmChanges = async () => {
-    const respuesta = window.confirm(
-      `¿Estás seguro de modificar este producto? ${editingProductId}`
-    );
-    if (respuesta) {
-      // Validar que ha habido cambios en los campos, para no saturar todos
-      try {
-        setLoading(true);
-        const res = await api.put(
-          `/productos/${editingProductId}`,
-          editableValues
-        );
+    setLoading(true);
+    try {
+      const res = await api.put(
+        `/productos/${editingProductId}`,
+        editableValues
+      );
 
-        // 👁 Actualizar cambios visualmente
-        setProductos((prev) =>
-          prev.map((prod) =>
-            prod._id === editingProductId
-              ? { ...prod, ...editableValues }
-              : prod
-          )
-        );
-      } catch (err) {
-        console.error("Error al actualizar datos: ", err);
-      } finally {
-        setLoading(false);
-        // resetear campos
-        setEditableValues({});
-        setEditingProductId(null);
-        console.log("Cambios confirmados: ", editableValues);
-      }
+      // 👁 Actualizar cambios visualmente
+      setProductos((prev) =>
+        prev.map((prod) =>
+          prod._id === editingProductId ? { ...prod, ...editableValues } : prod
+        )
+      );
+    } catch (err) {
+      alert("Datos erróneos");
+    } finally {
+      setLoading(false);
+      setEditableValues({});
+      setEditingProductId(null);
     }
-
-    // 🚀 Update cambios
   };
 
   return (
@@ -109,6 +100,11 @@ function ListProduct() {
         >
           Buscar
         </Button>
+        {loading && (
+          <div className="w-12 h-12">
+            <LoadingSpinner delay={0} />
+          </div>
+        )}
       </div>
 
       {/* Tabla */}
@@ -116,9 +112,9 @@ function ListProduct() {
         {/* Cabecera */}
         <ul className="grid grid-cols-5 gap-4 font-semibold bg-slate-200 p-2 border border-gray-400 text-left">
           <li>Nombre</li>
-          <li>Slug</li>
+          <li className="text-center">Stock</li>
           <li className="text-center">Imagen</li>
-          <li>Precio</li>
+          <li className="text-center">Precio</li>
           <li className="text-center">Acciones</li>
         </ul>
 
@@ -144,14 +140,35 @@ function ListProduct() {
                       ? editableValues.nombre
                       : prod.nombre
                   }
-                  className={`bg-transparent border-b ${
+                  className={`border p-1 ${
                     editingProductId === prod._id
-                      ? "border-black"
+                      ? "border-black bg-slate-50 "
                       : "border-transparent"
                   }`}
                 />
               </li>
-              <li>{prod.slug}</li>
+              <li className="text-center ">
+                <input
+                  onChange={(e) =>
+                    setEditableValues((prev) => ({
+                      ...prev,
+                      stock: e.target.value,
+                    }))
+                  }
+                  disabled={editingProductId !== prod._id}
+                  type="text"
+                  value={
+                    editingProductId === prod._id
+                      ? editableValues.stock
+                      : prod.stock
+                  }
+                  className={`text-center bg-transparent border p-1 ${
+                    editingProductId === prod._id
+                      ? "border-black bg-slate-50"
+                      : "border-transparent"
+                  }`}
+                />
+              </li>
               <li className="flex justify-center items-center">
                 <div
                   className={`w-12 h-12 p-1 rounded-full overflow-hidden ${
@@ -165,7 +182,29 @@ function ListProduct() {
                   />
                 </div>
               </li>
-              <li>{prod.precio} €</li>
+              <li className="text-center flex justify-center items-center gap-x-1">
+                <input
+                  onChange={(e) =>
+                    setEditableValues((prev) => ({
+                      ...prev,
+                      precio: e.target.value,
+                    }))
+                  }
+                  disabled={editingProductId !== prod._id}
+                  type="text"
+                  value={
+                    editingProductId === prod._id
+                      ? editableValues.precio
+                      : prod.precio
+                  }
+                  className={`text-center bg-transparent border p-1 ${
+                    editingProductId === prod._id
+                      ? "border-black bg-slate-50"
+                      : "border-transparent"
+                  }`}
+                />{" "}
+                €
+              </li>
 
               <li className="flex justify-center items-center gap-x-2">
                 {editingProductId !== prod._id ? (

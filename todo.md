@@ -1,6 +1,9 @@
 ### 🟡 Funcionalidades pendientes:
 
-backoffice
+# Dashboard
+
+    - Añadir nuevo producto
+    - Añadir flechita en cada categoría (títulos) y que al pinchar se ordenen por ella
 
 # Catálogo
 
