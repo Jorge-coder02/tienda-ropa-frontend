@@ -8,15 +8,16 @@ import Button from "../ui/Button";
 
 function ListProduct() {
   const [productos, setProductos] = useState([]); // guardo productos
-  const [loading, setLoading] = useState(false);
+  const [editableValues, setEditableValues] = useState({}); // guardar temporalmente los datos del prod al Editar
+  const [loading, setLoading] = useState(false); // cargas API
+  const [editingProductId, setEditingProductId] = useState(null); // 🖊 botón Editar producto clicado
 
   // 🚀 Petición API productos
   useEffect(() => {
     const fetchProductos = async () => {
       try {
         setLoading(true);
-        const response = await api.get(`/productos`); //
-        console.log("Respuesta: ", response);
+        const response = await api.get(`/productos`);
         setProductos(response.data);
       } catch (err) {
         console.error("Error al obtener productos:", err);
@@ -30,17 +31,58 @@ function ListProduct() {
 
   //   🚀❌ Delete product
   const handleDeleteProduct = async (prod) => {
-    const { _id } = prod;
-    try {
-      setLoading(true);
-      console.log("Borrando producto... ", _id);
-      const res = await api.delete(`/productos/${_id}`);
-      console.log("Producto eliminado: ", res.data);
-    } catch (err) {
-      console.error("Error al eliminar:", err);
-    } finally {
-      setLoading(false);
+    const respuesta = window.confirm(
+      `¿Estás seguro de eliminar este producto? ${prod.nombre}`
+    );
+    if (respuesta) {
+      const { _id } = prod;
+      try {
+        setLoading(true);
+        const res = await api.delete(`/productos/${_id}`);
+        setProductos((prev) => prev.filter((prod) => prod._id !== _id));
+      } catch (err) {
+        console.error("Error al eliminar:", err);
+      } finally {
+        setLoading(false);
+      }
     }
+  };
+
+  const handleEditProduct = (prod) => {
+    const { _id, nombre, slug, precio } = prod;
+    console.log("Modo edición");
+    setEditingProductId(prod._id); // producto id que estoy editando
+    setEditableValues({ nombre, slug, precio }); // podrías incluir más campos si quieres
+  };
+
+  const handleConfirmChanges = async () => {
+    const respuesta = window.confirm(
+      `¿Estás seguro de modificar este producto? ${editingProductId}`
+    );
+    if (respuesta) {
+      try {
+        setLoading(true);
+        const res = await api.put(`/productos/${editingProductId}`);
+        setProductos((prev) =>
+          prev.map((prod) =>
+            prod._id === editingProductId
+              ? { ...prod, ...editableValues }
+              : prod
+          )
+        );
+      } catch (err) {
+        console.error("Error al actualizar datos: ", err);
+      } finally {
+        setLoading(false);
+        // resetear campos
+        setEditableValues({});
+        setEditingProductId(null);
+      }
+    }
+    setEditingProductId(null);
+    console.log("Cambios confirmados: ", editableValues);
+
+    // 🚀 Update cambios
   };
 
   return (
@@ -80,7 +122,28 @@ function ListProduct() {
               key={prod._id}
               className="grid grid-cols-5 gap-4 items-center p-2 border-b border-gray-300"
             >
-              <li>{prod.nombre}</li>
+              <li>
+                <input
+                  onChange={(e) =>
+                    setEditableValues((prev) => ({
+                      ...prev,
+                      nombre: e.target.value,
+                    }))
+                  }
+                  disabled={editingProductId !== prod._id}
+                  type="text"
+                  value={
+                    editingProductId === prod._id
+                      ? editableValues.nombre
+                      : prod.nombre
+                  }
+                  className={`bg-transparent border-b ${
+                    editingProductId === prod._id
+                      ? "border-black"
+                      : "border-transparent"
+                  }`}
+                />
+              </li>
               <li>{prod.slug}</li>
               <li className="flex justify-center items-center">
                 <div
@@ -98,9 +161,24 @@ function ListProduct() {
               <li>{prod.precio} €</li>
 
               <li className="flex justify-center items-center gap-x-2">
-                <Button variant="success">🖊</Button>
+                {editingProductId !== prod._id ? (
+                  <Button
+                    onClick={() => handleEditProduct(prod)} // 🖊 Editar campos
+                    variant="success"
+                  >
+                    🖊
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => handleConfirmChanges()} // ✅ Confirmar cambios
+                    variant="primary"
+                  >
+                    ✔
+                  </Button>
+                )}
+
                 <Button
-                  onClick={() => handleDeleteProduct(prod)}
+                  onClick={() => handleDeleteProduct(prod)} // ❌ Eliminar prod
                   variant="danger"
                 >
                   x
