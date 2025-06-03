@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Este componente realiza una petición a la API y muestra todos los productos.
 // Menú CRUD que permite editar/eliminar productos
 
