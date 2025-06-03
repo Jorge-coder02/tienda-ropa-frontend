@@ -1,8 +1,3 @@
-// import ProductDetail from "../pages/ProductDetail"; ?
-// import Catalogo from "../pages/Catalogo";
-// import Carrito from "../pages/Carrito";
-// import NotFound from "../pages/NotFound"; ?
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Home from "../pages/Home";
@@ -17,6 +12,9 @@ const NotFound = lazy(() => import("../pages/NotFound"));
 const Carrito = lazy(() => import("../pages/Carrito"));
 const ProductDetail = lazy(() => import("../pages/ProductDetail"));
 
+// Admin
+import Dashboard from "../admin/Dashboard";
+
 export default function AppRouter() {
   return (
     <BrowserRouter>
@@ -24,6 +22,8 @@ export default function AppRouter() {
       <PageTitleUpdater />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Dashboard />} />
+        {/* <Route path="/admin" element={<Dashboard />} /> */}
 
         <Route
           path="/catalogo"

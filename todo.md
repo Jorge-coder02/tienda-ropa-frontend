@@ -1,13 +1,11 @@
 ### 🟡 Funcionalidades pendientes:
 
+backoffice
+
 # Catálogo
 
     - optimizar carga imágenes catálogo
     - paginación catálogo
-
-# Producto
-
-# Carrito
 
 # Extra
 
