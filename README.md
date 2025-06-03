@@ -16,6 +16,7 @@
 ## ✨ Características Destacadas
 
 - ✅👚 API propia de donde se proveen los productos
+- ✅🔨 Backoffice: Dashboard para gestionar productos
 - ✅🤖 UpTimeRobot: Monitorear el estado del backend
 - ✅☁ Cloudinary: Alojar fotos de la API
 - ✅🦴 Skeleton loading para carga dinámica de peticiones al backend.
