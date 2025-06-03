@@ -29,7 +29,7 @@ function ListProduct() {
     fetchProductos();
   }, []);
 
-  //   🚀❌ Delete product
+  // 🚀❌ Delete product
   const handleDeleteProduct = async (prod) => {
     const respuesta = window.confirm(
       `¿Estás seguro de eliminar este producto? ${prod.nombre}`
@@ -48,21 +48,29 @@ function ListProduct() {
     }
   };
 
+  // 🔄 Modo edición
   const handleEditProduct = (prod) => {
     const { _id, nombre, slug, precio } = prod;
     console.log("Modo edición");
-    setEditingProductId(prod._id); // producto id que estoy editando
-    setEditableValues({ nombre, slug, precio }); // podrías incluir más campos si quieres
+    setEditingProductId(_id); // guardo producto id que estoy editando
+    setEditableValues({ nombre, slug, precio }); // guardo los valores actuales del producto
   };
 
+  // 🚀🔄 Confirmar cambios
   const handleConfirmChanges = async () => {
     const respuesta = window.confirm(
       `¿Estás seguro de modificar este producto? ${editingProductId}`
     );
     if (respuesta) {
+      // Validar que ha habido cambios en los campos, para no saturar todos
       try {
         setLoading(true);
-        const res = await api.put(`/productos/${editingProductId}`);
+        const res = await api.put(
+          `/productos/${editingProductId}`,
+          editableValues
+        );
+
+        // 👁 Actualizar cambios visualmente
         setProductos((prev) =>
           prev.map((prod) =>
             prod._id === editingProductId
@@ -77,10 +85,9 @@ function ListProduct() {
         // resetear campos
         setEditableValues({});
         setEditingProductId(null);
+        console.log("Cambios confirmados: ", editableValues);
       }
     }
-    setEditingProductId(null);
-    console.log("Cambios confirmados: ", editableValues);
 
     // 🚀 Update cambios
   };
