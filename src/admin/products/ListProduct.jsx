@@ -44,8 +44,23 @@ function ListProduct() {
         setLoading(true); // *** acar atrás
         const res = await api.delete(`/productos/${_id}`);
         setProductos((prev) => prev.filter((prod) => prod._id !== _id));
-      } catch (err) {
-        console.error("Error al eliminar:", err);
+      } catch (error) {
+        console.error("Error completo:", error);
+
+        if (error.response) {
+          // Error de respuesta del servidor
+          const errorMsg =
+            error.response.data?.msg || error.response.data?.message;
+          alert(
+            `Error al eliminar: ${errorMsg || "Error desconocido del servidor"}`
+          );
+        } else if (error.request) {
+          // No se recibió respuesta
+          alert("No se recibió respuesta del servidor. Verifica tu conexión.");
+        } else {
+          // Error de configuración
+          alert(`Error de configuración: ${error.message}`);
+        }
       } finally {
         setLoading(false);
       }
