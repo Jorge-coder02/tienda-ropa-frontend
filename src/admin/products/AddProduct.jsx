@@ -42,28 +42,30 @@ function AddProduct() {
 
   // 🚀🟢 Fetch enviar datos
   const handleAddProduct = async () => {
-    // Validar campos
-
-    // Subir imagen a Cloudinary
-    const imageFile = imageInputRef.current.files[0]; // recojo imagen
-    const imageUrl = await uploadImageToCloudinary(imageFile); // subo a Cloudinary, devuelve url pública
-
-    const slug = toSlug(newProduct.nombre); // generar slug a partir del nombre
-
-    console.log("Cloudinary devuelve URL: ", imageUrl);
-    // Copia del objeto
-    const productToSend = {
-      ...newProduct,
-      slug,
-      imagen: imageUrl,
-    };
-    console.log("Envío: ", productToSend);
-
     setLoading(true);
     setError("");
     setSuccessProduct(false);
+
     try {
-      await api.post("/productos", productToSend); // 👈 envío los datos aquí
+      const imageFile = imageInputRef.current.files[0]; // recojo imagen
+
+      // Función que sube la imagen y devuelve { url, public_id }
+      const { url: imageUrl, public_id } = await uploadImageToCloudinary(
+        imageFile
+      );
+
+      const slug = toSlug(newProduct.nombre);
+
+      const productToSend = {
+        ...newProduct,
+        slug,
+        imagen: imageUrl,
+        public_id, // <-- ahora añado public_id de la img Cloudinary
+      };
+
+      console.log("Envío: ", productToSend);
+
+      await api.post("/productos", productToSend);
       setSuccessProduct(true);
     } catch (error) {
       const message =
