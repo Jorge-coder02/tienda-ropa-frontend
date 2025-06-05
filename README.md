@@ -13,11 +13,12 @@
 ![Express](https://img.shields.io/badge/Express-5.1.0-000000?logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-8.0.4-47A248?logo=mongodb&logoColor=white)
 
-## ✨ Características Destacadas
+## ✨ Características
 
 - ✅👚 API propia de donde se proveen los productos
+- ✅🔨 Backoffice: Admin dashboard para gestionar productos
 - ✅🤖 UpTimeRobot: Monitorear el estado del backend
-- ✅☁ Cloudinary: Alojar fotos de la API
+- ✅☁ Cloudinary: Alojar imágenes de la API
 - ✅🦴 Skeleton loading para carga dinámica de peticiones al backend.
 - ✅🔄 Loading spinner para carga entre páginas.
 - ✅🖼 Optimización de imágenes (WebP)
