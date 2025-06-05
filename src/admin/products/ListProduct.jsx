@@ -125,6 +125,7 @@ function ListProduct() {
               key={prod._id}
               className="grid grid-cols-5 gap-4 items-center p-2 border-b border-gray-300"
             >
+              {/* Nombre */}
               <li>
                 <input
                   onChange={(e) =>
@@ -147,6 +148,7 @@ function ListProduct() {
                   }`}
                 />
               </li>
+              {/* Stock */}
               <li className="text-center ">
                 <input
                   onChange={(e) =>
@@ -162,13 +164,14 @@ function ListProduct() {
                       ? editableValues.stock
                       : prod.stock
                   }
-                  className={`text-center bg-transparent border p-1 ${
+                  className={`text-center border p-1 ${
                     editingProductId === prod._id
                       ? "border-black bg-slate-50"
                       : "border-transparent"
                   }`}
                 />
               </li>
+              {/* Género */}
               <li className="flex justify-center items-center">
                 <div
                   className={`w-12 h-12 p-1 rounded-full overflow-hidden ${
@@ -182,6 +185,7 @@ function ListProduct() {
                   />
                 </div>
               </li>
+              {/* Precio */}
               <li className="text-center flex justify-center items-center gap-x-1">
                 <input
                   onChange={(e) =>
@@ -197,7 +201,7 @@ function ListProduct() {
                       ? editableValues.precio
                       : prod.precio
                   }
-                  className={`text-center bg-transparent border p-1 ${
+                  className={`text-center border p-1 max-w-[70px] ${
                     editingProductId === prod._id
                       ? "border-black bg-slate-50"
                       : "border-transparent"
@@ -206,17 +210,20 @@ function ListProduct() {
                 €
               </li>
 
+              {/* Botones */}
               <li className="flex justify-center items-center gap-x-2">
                 {editingProductId !== prod._id ? (
+                  // 🖍 Botón editar
                   <Button
-                    onClick={() => handleEditProduct(prod)} // 🖊 Editar campos
+                    onClick={() => handleEditProduct(prod)}
                     variant="success"
                   >
                     🖊
                   </Button>
                 ) : (
+                  // ✔ Botón confirmar
                   <Button
-                    onClick={() => handleConfirmChanges()} // ✅ Confirmar cambios
+                    onClick={() => handleConfirmChanges()}
                     variant="primary"
                   >
                     ✔

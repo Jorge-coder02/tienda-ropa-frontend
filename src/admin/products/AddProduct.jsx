@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "../ui/Button";
 import api from "../../api/axios";
 import toSlug from "../../utility/toSlug";
 import LoadingSpinner from "../../components/ui/LoadingSpinner2";
+import { uploadImageToCloudinary } from "../../utility/uploadImageToCloudinary";
 
 function AddProduct() {
   const [loading, setLoading] = useState(false);
@@ -20,6 +21,7 @@ function AddProduct() {
     genero: "hombre", // default
     categoria: "camisetas",
   });
+  const imageInputRef = useRef(null);
 
   // 🚀 Fetch categorías
   useEffect(() => {
@@ -42,15 +44,18 @@ function AddProduct() {
   const handleAddProduct = async () => {
     // Validar campos
 
-    // Imagen (cómo subir a Cloudinary?) - en principio subir como imagen una URL cloudinary con el Nombre
+    // Subir imagen a Cloudinary
+    const imageFile = imageInputRef.current.files[0]; // recojo imagen
+    const imageUrl = await uploadImageToCloudinary(imageFile); // subo a Cloudinary, devuelve url pública
 
     const slug = toSlug(newProduct.nombre); // generar slug a partir del nombre
 
+    console.log("Cloudinary devuelve URL: ", imageUrl);
     // Copia del objeto
     const productToSend = {
       ...newProduct,
       slug,
-      imagen: slug, // concatenar cloudinary + slug, subirla por otro lado ??
+      imagen: imageUrl,
     };
     console.log("Envío: ", productToSend);
 
@@ -108,7 +113,12 @@ function AddProduct() {
             />
 
             {/* Imagen */}
-            <input type="file" className="p-2 w-full" placeholder="Imagen" />
+            <input
+              ref={imageInputRef}
+              type="file"
+              accept="image/*"
+              className="p-2 w-full"
+            />
           </div>
           {/* Abajo */}
           <div className="flex gap-x-2">
