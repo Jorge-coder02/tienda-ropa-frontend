@@ -13,7 +13,7 @@
 ![Express](https://img.shields.io/badge/Express-5.1.0-000000?logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-8.0.4-47A248?logo=mongodb&logoColor=white)
 
-## ✨ Características
+## ✨ Características app
 
 - ✅👚 API propia de donde se proveen los productos
 - ✅🔨 Backoffice: Admin dashboard para gestionar productos
