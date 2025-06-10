@@ -3,7 +3,7 @@
 [![Urbanwearx](https://img.shields.io/badge/Status-In_Progress-yellow)](https://github.com/Jorge-coder02/tienda-ropa-frontend)
 [![Licencia](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
-🔗 **Visitar:** [Ver en vivo](https://urbanwearx.netlify.app/)
+🔗 **Visitar sitio:** [Ver en vivo](https://urbanwearx.netlify.app/)
 
 ## 🚀 Tecnologías Principales
 
