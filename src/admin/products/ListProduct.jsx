@@ -1,91 +1,43 @@
-/* eslint-disable no-unused-vars */
 // Este componente realiza una petición a la API y muestra todos los productos.
 // Menú CRUD que permite editar/eliminar productos
 
 // Posibles mejoras: Editar producto -> hacer una segunda copia del producto para compararla
 // al confirmar y ver si hay cambios antes del fetch
 
-import { useEffect, useState } from "react";
-import api from "../../api/axios";
+import { useState } from "react";
 import { useProductos } from "../../api/hooks/useProductos";
+
+// UI
 import Button from "../ui/Button";
 import LoadingSpinner from "../../components/ui/LoadingSpinner2";
 
 function ListProduct() {
-  // const [productos, setProductos] = useState([]); // guardo productos
-  const [editableValues, setEditableValues] = useState({}); // guardar temporalmente los datos del prod al Editar
-  // const [loading, setLoading] = useState(false); // cargas API
-  const [editingProductId, setEditingProductId] = useState(null); // 🖊 botón Editar producto clicado
   const [inputSearch, setInputSearch] = useState(""); // 🔎 input búsqueda
-  const { productos, loading, buscarPorNombre, eliminarProducto } =
-    useProductos();
+  const {
+    productos,
+    loading,
+    buscarPorNombre,
+    eliminarProducto,
+    handleEditProduct,
+    handleConfirmChanges,
+    editableValues,
+    setEditableValues,
+    editingProductId,
+  } = useProductos();
 
-  // 🚀❌ Delete product
-  const handleDeleteProduct = async (prod) => {
+  // ✖ Manejo del delete (confirmación y llamada a la API)
+  const handleDeleteClick = async (prod) => {
     const respuesta = window.confirm(
       `¿Estás seguro de eliminar este producto? ${prod.nombre}`
     );
     if (respuesta) {
-      const { _id } = prod;
       try {
-        setLoading(true); // *** acar atrás
-        const res = await api.delete(`/productos/${_id}`);
-        setProductos((prev) => prev.filter((prod) => prod._id !== _id));
+        await eliminarProducto(prod);
       } catch (error) {
-        console.error("Error completo:", error);
-
-        if (error.response) {
-          // Error de respuesta del servidor
-          const errorMsg =
-            error.response.data?.msg || error.response.data?.message;
-          alert(
-            `Error al eliminar: ${errorMsg || "Error desconocido del servidor"}`
-          );
-        } else if (error.request) {
-          // No se recibió respuesta
-          alert("No se recibió respuesta del servidor. Verifica tu conexión.");
-        } else {
-          // Error de configuración
-          alert(`Error de configuración: ${error.message}`);
-        }
-      } finally {
-        setLoading(false);
+        alert("Error al eliminar producto:", error.message);
       }
     }
   };
-
-  // 🔄 Modo edición
-  const handleEditProduct = (prod) => {
-    const { _id, nombre, stock, precio } = prod;
-    setEditingProductId(_id); // guardo producto id que estoy editando
-    setEditableValues({ nombre, stock, precio }); // guardo los valores actuales del producto
-  };
-
-  // 🚀🔄 Confirmar cambios
-  const handleConfirmChanges = async () => {
-    setLoading(true);
-    try {
-      const res = await api.put(
-        `/productos/${editingProductId}`,
-        editableValues
-      );
-
-      // 👁 Actualizar cambios visualmente
-      setProductos((prev) =>
-        prev.map((prod) =>
-          prod._id === editingProductId ? { ...prod, ...editableValues } : prod
-        )
-      );
-    } catch (err) {
-      alert("Datos erróneos");
-    } finally {
-      setLoading(false);
-      setEditableValues({});
-      setEditingProductId(null);
-    }
-  };
-
-  // 🔎 Buscar productos por nombre al hacer click en Buscar
 
   return (
     <div className="flex flex-col gap-y-6">
@@ -93,12 +45,23 @@ function ListProduct() {
       <h2 className="text-xl font-semibold">Listado de productos</h2>
       {/* 🔎 Barra búsqueda */}
       <div className="flex gap-x-2 max-w-7xl">
-        <input
-          onChange={(e) => setInputSearch(e.target.value)}
-          type="text"
-          placeholder={`🔎 Buscar por nombre`}
-          className="w-1/2 px-4 py-2 bg-white text-black rounded-xl"
-        />
+        <div className="relative w-1/2">
+          <input
+            type="text"
+            value={inputSearch}
+            onChange={(e) => setInputSearch(e.target.value)}
+            placeholder="🔎 Buscar por nombre"
+            className="w-full px-4 py-2 pr-10 bg-white text-black rounded-xl"
+          />
+          {inputSearch && (
+            <button
+              onClick={() => setInputSearch("")}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-black"
+            >
+              ✖
+            </button>
+          )}
+        </div>
         <Button onClick={() => buscarPorNombre(inputSearch)} variant="primary">
           Buscar
         </Button>
@@ -233,7 +196,7 @@ function ListProduct() {
                 )}
 
                 <Button
-                  onClick={() => eliminarProducto(prod)} // ❌ Eliminar prod
+                  onClick={() => handleDeleteClick(prod)} // ❌ Eliminar prod
                   variant="danger"
                 >
                   x

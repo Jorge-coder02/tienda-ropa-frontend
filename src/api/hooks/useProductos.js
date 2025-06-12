@@ -6,73 +6,106 @@ import api from "../axios";
 export function useProductos() {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // 🚀 Fetch inicial de productos
-  useEffect(() => {
-    const fetchProductos = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get(`/productos`);
-        setProductos(response.data);
-      } catch (err) {
-        console.error("Error al obtener productos:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const [editableValues, setEditableValues] = useState({});
+  const [editingProductId, setEditingProductId] = useState(null);
 
-    fetchProductos();
-  }, []);
-
-  // 💬 Fetch búsqueda por nombre
-  const buscarPorNombre = async (nombre) => {
+  // 🚀 Petición inicial productos
+  const fetchProductos = async () => {
+    setLoading(true);
+    setError(null);
     try {
-      setLoading(true);
-      const res = nombre.trim()
-        ? await api.get(`/productos/nombre/${nombre}`)
-        : await api.get("/productos");
-      setProductos(res.data);
-    } catch (error) {
-      console.error("Error al buscar productos:", error);
+      const response = await api.get(`/productos`);
+      setProductos(response.data);
+    } catch (err) {
+      setError(err);
     } finally {
       setLoading(false);
     }
   };
 
-  const eliminarProducto = async (prod) => {
-    const respuesta = window.confirm(
-      `¿Estás seguro de eliminar este producto? ${prod.nombre}`
-    );
-    if (respuesta) {
-      try {
-        setLoading(true);
-        await api.delete(`/productos/${prod._id}`);
-        setProductos((prev) => prev.filter((p) => p._id !== prod._id));
-      } catch (error) {
-        console.error("Error al eliminar producto:", error);
-        if (error.response) {
-          throw new Error(
-            error.response.data?.msg ||
-              error.response.data?.message ||
-              "Error desconocido"
-          );
-        } else if (error.request) {
-          throw new Error(
-            "No se recibió respuesta del servidor. Verifica tu conexión."
-          );
-        } else {
-          throw new Error(`Error de configuración: ${error.message}`);
-        }
-      } finally {
-        setLoading(false);
+  useEffect(() => {
+    fetchProductos();
+  }, []);
+
+  // 💬 Buscar por nombre
+  const buscarPorNombre = async (nombre) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = nombre.trim()
+        ? await api.get(`/productos/nombre/${nombre}`)
+        : await api.get("/productos");
+      setProductos(res.data);
+    } catch (err) {
+      // Si es 404, limpiar productos
+      if (err.response && err.response.status === 404) {
+        setProductos([]); // limpio la lista
+        setError("No se encontraron productos");
+      } else {
+        setError(err.message || "Error inesperado");
       }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ✖ Eliminar producto
+  const eliminarProducto = async (prod) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await api.delete(`/productos/${prod._id}`);
+      setProductos((prev) => prev.filter((p) => p._id !== prod._id));
+    } catch (err) {
+      setError(err);
+      throw err; // para que el componente también pueda reaccionar
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 🖍 Mientras se está editando
+  const handleEditProduct = (prod) => {
+    const { _id, nombre, stock, precio } = prod;
+    setEditingProductId(_id);
+    setEditableValues({ nombre, stock, precio });
+  };
+
+  // 🖍✔ Confirmar edición
+  const handleConfirmChanges = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      await api.put(`/productos/${editingProductId}`, editableValues);
+      setProductos((prev) =>
+        prev.map((prod) =>
+          prod._id === editingProductId ? { ...prod, ...editableValues } : prod
+        )
+      );
+      setEditingProductId(null);
+      setEditableValues({});
+    } catch (err) {
+      setError(err);
+      throw err;
+    } finally {
+      setLoading(false);
     }
   };
 
   return {
     productos,
     loading,
+    error,
     buscarPorNombre,
     eliminarProducto,
+    handleEditProduct,
+    handleConfirmChanges,
+    editableValues,
+    setEditableValues,
+    editingProductId,
+    setEditingProductId,
+    fetchProductos,
   };
 }
