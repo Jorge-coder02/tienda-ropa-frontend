@@ -7,32 +7,18 @@
 
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
+import { useProductos } from "../../api/hooks/useProductos";
 import Button from "../ui/Button";
 import LoadingSpinner from "../../components/ui/LoadingSpinner2";
 
 function ListProduct() {
-  const [productos, setProductos] = useState([]); // guardo productos
+  // const [productos, setProductos] = useState([]); // guardo productos
   const [editableValues, setEditableValues] = useState({}); // guardar temporalmente los datos del prod al Editar
-  const [loading, setLoading] = useState(false); // cargas API
+  // const [loading, setLoading] = useState(false); // cargas API
   const [editingProductId, setEditingProductId] = useState(null); // 🖊 botón Editar producto clicado
   const [inputSearch, setInputSearch] = useState(""); // 🔎 input búsqueda
-
-  // 🚀 Petición API productos
-  useEffect(() => {
-    const fetchProductos = async () => {
-      try {
-        setLoading(true); // *** sacar atrás
-        const response = await api.get(`/productos`);
-        setProductos(response.data);
-      } catch (err) {
-        console.error("Error al obtener productos:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProductos();
-  }, []);
+  const { productos, loading, buscarPorNombre, eliminarProducto } =
+    useProductos();
 
   // 🚀❌ Delete product
   const handleDeleteProduct = async (prod) => {
@@ -100,24 +86,6 @@ function ListProduct() {
   };
 
   // 🔎 Buscar productos por nombre al hacer click en Buscar
-  const handleSearchByName = async () => {
-    if (!inputSearch.trim()) {
-      // Si el input está vacío, recargar todos los productos
-      const response = await api.get(`/productos`);
-      setProductos(response.data);
-      return;
-    }
-
-    try {
-      setLoading(true);
-      const response = await api.get(`/productos/nombre/${inputSearch}`);
-      setProductos(response.data);
-    } catch (error) {
-      console.error("Error al buscar productos:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="flex flex-col gap-y-6">
@@ -128,10 +96,10 @@ function ListProduct() {
         <input
           onChange={(e) => setInputSearch(e.target.value)}
           type="text"
-          placeholder="🔎 Buscar por nombre"
+          placeholder={`🔎 Buscar por nombre`}
           className="w-1/2 px-4 py-2 bg-white text-black rounded-xl"
         />
-        <Button onClick={() => handleSearchByName()} variant="primary">
+        <Button onClick={() => buscarPorNombre(inputSearch)} variant="primary">
           Buscar
         </Button>
         {loading && (
@@ -265,7 +233,7 @@ function ListProduct() {
                 )}
 
                 <Button
-                  onClick={() => handleDeleteProduct(prod)} // ❌ Eliminar prod
+                  onClick={() => eliminarProducto(prod)} // ❌ Eliminar prod
                   variant="danger"
                 >
                   x
