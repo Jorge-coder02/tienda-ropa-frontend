@@ -3,7 +3,7 @@
 [![Urbanwearx](https://img.shields.io/badge/Status-In_Progress-yellow)](https://github.com/Jorge-coder02/tienda-ropa-frontend)
 [![Licencia](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
-🔗 **Visitar:** [Ver en vivo](https://urbanwearx.netlify.app/)
+🔗 **Visitar sitio:** [Ver en vivo](https://urbanwearx.netlify.app/)
 
 ## 🚀 Tecnologías Principales
 
@@ -13,7 +13,7 @@
 ![Express](https://img.shields.io/badge/Express-5.1.0-000000?logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-8.0.4-47A248?logo=mongodb&logoColor=white)
 
-## ✨ Características
+## ✨ Características app
 
 - ✅👚 API propia de donde se proveen los productos
 - ✅🔨 Backoffice: Admin dashboard para gestionar productos
