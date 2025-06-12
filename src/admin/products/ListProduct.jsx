@@ -15,6 +15,7 @@ function ListProduct() {
   const [editableValues, setEditableValues] = useState({}); // guardar temporalmente los datos del prod al Editar
   const [loading, setLoading] = useState(false); // cargas API
   const [editingProductId, setEditingProductId] = useState(null); // 🖊 botón Editar producto clicado
+  const [inputSearch, setInputSearch] = useState(""); // 🔎 input búsqueda
 
   // 🚀 Petición API productos
   useEffect(() => {
@@ -98,21 +99,39 @@ function ListProduct() {
     }
   };
 
+  // 🔎 Buscar productos por nombre al hacer click en Buscar
+  const handleSearchByName = async () => {
+    if (!inputSearch.trim()) {
+      // Si el input está vacío, recargar todos los productos
+      const response = await api.get(`/productos`);
+      setProductos(response.data);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await api.get(`/productos/nombre/${inputSearch}`);
+      setProductos(response.data);
+    } catch (error) {
+      console.error("Error al buscar productos:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-y-6">
       {/* Listado productos */}
       <h2 className="text-xl font-semibold">Listado de productos</h2>
-      {/* Barra búsqueda */}
+      {/* 🔎 Barra búsqueda */}
       <div className="flex gap-x-2 max-w-7xl">
         <input
+          onChange={(e) => setInputSearch(e.target.value)}
           type="text"
           placeholder="🔎 Buscar por nombre"
           className="w-1/2 px-4 py-2 bg-white text-black rounded-xl"
         />
-        <Button
-          onClick={() => console.log("Buscando producto...")}
-          variant="primary"
-        >
+        <Button onClick={() => handleSearchByName()} variant="primary">
           Buscar
         </Button>
         {loading && (

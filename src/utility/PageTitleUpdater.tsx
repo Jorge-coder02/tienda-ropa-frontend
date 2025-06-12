@@ -14,9 +14,10 @@ function PageTitleUpdater() {
     if (location.pathname === "/") pageTitle = "Inicio";
     else if (location.pathname === "/catalogo") pageTitle = "Catálogo";
     else if (location.pathname === "/carrito") pageTitle = "Mi carrito";
+    else if (location.pathname === "/admin") pageTitle = "Dashboard";
     else if (location.pathname.startsWith("/productos/")) {
       const slug = location.pathname.split("/")[2];
-      // Si quieres algo más amigable visualmente:
+      // más amigable visualmente:
       const nombre = slug.replace(/-/g, " ");
       pageTitle = `Producto - ${nombre}`;
     }

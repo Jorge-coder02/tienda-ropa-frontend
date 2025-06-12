@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Products from "../admin/Products";
 import DashboardContent from "../admin/DashboardContent";
+import AsideButton from "./ui/AsideButton";
 
 function Dashboard() {
   const [view, setView] = useState("dashboard");
@@ -16,33 +17,22 @@ function Dashboard() {
   return (
     <div className="min-h-[100dvh] flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-md p-6 flex flex-col gap-4">
+      <aside className="w-80 bg-white shadow-md p-6 flex flex-col gap-4">
         <h2 className="text-xl font-bold mb-6">Admin</h2>
-        <nav className="flex flex-col gap-2 hover:[&>button]:underline">
-          <button
+        <nav className="flex flex-col gap-2">
+          <AsideButton
+            texto="📊 Dashboard"
             onClick={() => setView("dashboard")}
-            className="text-left text-slate-700 hover:text-black"
-          >
-            📊 Dashboard
-          </button>
-          <button
+          />
+          <AsideButton
+            texto="🛍️ Productos"
             onClick={() => setView("products")}
-            className="text-left text-slate-700 hover:text-black"
-          >
-            🛍️ Productos
-          </button>
-          <button
-            // onClick={() => setView("orders")}
-            className="text-left text-slate-700 hover:text-black"
-          >
-            📦 Pedidos
-          </button>
-          <button
-            // onClick={() => setView("settings")}
-            className="text-left text-slate-700 hover:text-black"
-          >
-            ⚙️ Configuración
-          </button>
+          />
+          <AsideButton texto="📦 Pedidos" onClick={() => setView("orders")} />
+          <AsideButton
+            texto="⚙️ Configuración"
+            onClick={() => setView("settings")}
+          />
         </nav>
       </aside>
 

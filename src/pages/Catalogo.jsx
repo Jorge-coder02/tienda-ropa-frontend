@@ -108,6 +108,10 @@ function Catalogo() {
                 <option value="camisetas">Camisetas</option>
                 <option value="pantalones">Pantalones</option>
                 <option value="zapatillas">Zapatillas</option>
+                <option value="sudaderas">Sudaderas</option>
+                <option value="abrigos">Abrigos</option>
+                <option value="accesorios">Accesorios</option>
+                {/* Aquí puedes añadir más categorías según tu base de datos */}
               </select>
               <input
                 onClick={handleClickFiltro} // Aquí puedes implementar la lógica de búsqueda
