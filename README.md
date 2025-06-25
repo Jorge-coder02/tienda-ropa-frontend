@@ -16,8 +16,8 @@
 ## ✨ Características app
 
 - ✅👚 API propia de donde se proveen los productos
-- ✅🔨 Backoffice: Admin dashboard para gestionar productos
-- ✅🤖 UpTimeRobot: Monitorear el estado del backend
+- ✅🔨 Backoffice: Admin dashboard para gestionar productos.
+- ✅🤖 UpTimeRobot: Monitorear el estado del backend. 
 - ✅☁ Cloudinary: Alojar imágenes de la API
 - ✅🦴 Skeleton loading para carga dinámica de peticiones al backend.
 - ✅🔄 Loading spinner para carga entre páginas.
