@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Layout from "../layout/Layout";
 import ItemProducto from "../components/ui/PageComps/catalogo/ItemProducto";
 import { useEffect, useState } from "react";
@@ -5,6 +6,7 @@ import api from "../api/axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setGenero } from "../store/filtroSlice";
 import ProductSkeleton from "../utility/ProductSkeleton";
+import { useFetchProductos } from "../api/hooks/useFetchProductos"; // ruta según dónde lo guardes
 // import CategorySkeleton from "../utility/CategorySkeleton";
 // en el futuro usar categoryskeleton
 
@@ -15,9 +17,9 @@ function Catalogo() {
     (state) => state.filtros.filtros.scrollPosition
   );
 
-  const [productos, setProductos] = useState([]);
   const [filtroSelect, setFiltroSelect] = useState("all");
-  const [loading, setLoading] = useState(true);
+
+  const { productos, loading, error } = useFetchProductos(genero, filtroSelect);
 
   // 1º Mover scroll a la posición guardada en Redux
   useEffect(() => {
@@ -31,39 +33,11 @@ function Catalogo() {
     }
   }, [scrollPosition]);
 
-  // 🚀 Petición inicial productos, también cuando género cambia
-  useEffect(() => {
-    const fetchProductos = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get(`/productos/genero/${genero}`); // hacer la petición de productos a un género específico
-        setProductos(response.data);
-      } catch (err) {
-        console.error("Error al obtener productos:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProductos();
-  }, [genero]);
-
-  // 🚀📌 Consulta de filtro
+  // 🚀 Petición inicial productos y consulta de filtro ahora se manejan en useFetchProductos hook
+  // Eliminar lógica redundante de fetchProductos y handleClickFiltro
   const handleClickFiltro = () => {
-    // Consulta al backend con el filtro seleccionado
-    api
-      .get(`/productos/filtro`, {
-        params: {
-          genero,
-          categoria: filtroSelect === "all" ? "" : filtroSelect, // Si es "all", no se filtra por categoría
-        },
-      })
-      .then((response) => {
-        setProductos(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener productos filtrados:", error);
-      });
+    // Esta función puede quedar vacía o simplemente actualizar el filtro seleccionado si es necesario
+    // Si useFetchProductos depende de filtroSelect, se actualizará automáticamente
   };
 
   return (

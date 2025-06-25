@@ -2,7 +2,6 @@
 
 # Dashboard
 
-    - custom hook aplicado a carrito/otros
     - menu mobile sandwich para mostrar el aside
     - accesibilidad: al dar enter también buscar por nombre
 
