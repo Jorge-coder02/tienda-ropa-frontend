@@ -6,7 +6,6 @@ export function useFetchProductos(genero, categoria = "all") {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // dentro del hook useFetchProductos
   useEffect(() => {
     const fetchProductos = async () => {
       setLoading(true);

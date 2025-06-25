@@ -2,7 +2,6 @@
 
 # Dashboard
 
-    - menu mobile sandwich para mostrar el aside
     - accesibilidad: al dar enter también buscar por nombre
 
 # Catálogo
