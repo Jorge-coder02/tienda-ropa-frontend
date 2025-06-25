@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+/* eslint-disable no-unused-vars */
+import { useState, useEffect, useMemo } from "react";
 import api from "../axios";
 
 // export const fetchProductos = () => api.get("/productos");
@@ -10,6 +11,36 @@ export function useProductos() {
 
   const [editableValues, setEditableValues] = useState({});
   const [editingProductId, setEditingProductId] = useState(null);
+
+  // Orden de los productos por nombre
+  const [ordenAscendente, setOrdenAscendente] = useState(true);
+  const [campoOrden, setCampoOrden] = useState(null);
+
+  // Función para ordenar
+  const ordenarPorCampo = (campo) => {
+    if (campo === campoOrden) {
+      setOrdenAscendente((prev) => !prev);
+    } else {
+      setCampoOrden(campo);
+      setOrdenAscendente(true);
+    }
+  };
+
+  const productosOrdenados = useMemo(() => {
+    if (!campoOrden) return productos;
+
+    const copia = [...productos];
+    copia.sort((a, b) => {
+      const valA = a[campoOrden]?.toString().toLowerCase();
+      const valB = b[campoOrden]?.toString().toLowerCase();
+
+      if (valA < valB) return ordenAscendente ? -1 : 1;
+      if (valA > valB) return ordenAscendente ? 1 : -1;
+      return 0;
+    });
+
+    return copia;
+  }, [productos, campoOrden, ordenAscendente]);
 
   // 🚀 Petición inicial productos
   const fetchProductos = async () => {
@@ -95,7 +126,7 @@ export function useProductos() {
   };
 
   return {
-    productos,
+    // productos,
     loading,
     error,
     buscarPorNombre,
@@ -107,5 +138,9 @@ export function useProductos() {
     editingProductId,
     setEditingProductId,
     fetchProductos,
+    productos: productosOrdenados, // exportas los ordenados
+    ordenarPorCampo,
+    campoOrden,
+    ordenAscendente,
   };
 }

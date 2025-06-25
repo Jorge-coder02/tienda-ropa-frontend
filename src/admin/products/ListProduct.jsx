@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Este componente realiza una petición a la API y muestra todos los productos.
 // Menú CRUD que permite editar/eliminar productos
 
@@ -23,6 +24,9 @@ function ListProduct() {
     editableValues,
     setEditableValues,
     editingProductId,
+    ordenarPorCampo,
+    campoOrden,
+    ordenAscendente,
   } = useProductos();
 
   // ✖ Manejo del delete (confirmación y llamada a la API)
@@ -73,13 +77,33 @@ function ListProduct() {
       </div>
 
       {/* Tabla */}
-      <div className="flex flex-col w-full max-w-7xl">
+      <div className="flex flex-col w-full md:max-w-7xl max-w-full">
         {/* Cabecera */}
-        <ul className="grid grid-cols-5 gap-4 font-semibold bg-slate-200 p-2 border border-gray-400 text-left">
-          <li>Nombre</li>
-          <li className="text-center">Stock</li>
-          <li className="text-center">Imagen</li>
-          <li className="text-center">Precio</li>
+        <ul className="grid grid-cols-2 md:grid-cols-5 gap-4 font-semibold bg-slate-200 p-2 border border-gray-400 text-left text-sm">
+          <li
+            className="cursor-pointer text-center flex justify-center items-center gap-x-1 bg-slate-400 hover:bg-slate-500 text-white rounded-md transition-colors duration-200 mx-8 px-2 py-1"
+            onClick={() => ordenarPorCampo("nombre")}
+          >
+            Nombre
+          </li>
+          <li
+            className="cursor-pointer text-center flex justify-center items-center gap-x-1 bg-slate-400 hover:bg-slate-500 text-white rounded-md transition-colors duration-200 mx-8 px-2 py-1"
+            onClick={() => ordenarPorCampo("stock")}
+          >
+            Stock
+          </li>
+          <li
+            className="cursor-pointer text-center flex justify-center items-center gap-x-1 bg-slate-400 hover:bg-slate-500 text-white rounded-md transition-colors duration-200 mx-8 px-2 py-1"
+            onClick={() => ordenarPorCampo("imagen")}
+          >
+            Imagen
+          </li>
+          <li
+            className="cursor-pointer text-center flex justify-center items-center gap-x-1 bg-slate-400 hover:bg-slate-500 text-white rounded-md transition-colors duration-200 mx-8 px-2 py-1"
+            onClick={() => ordenarPorCampo("precio")}
+          >
+            Precio
+          </li>
           <li className="text-center">Acciones</li>
         </ul>
 
@@ -88,7 +112,7 @@ function ListProduct() {
           productos.map((prod) => (
             <ul
               key={prod._id}
-              className="grid grid-cols-5 gap-4 items-center p-2 border-b border-gray-300"
+              className="grid grid-cols-2 lg:grid-cols-5 gap-4 items-center p-2 border-b border-gray-300 text-sm"
             >
               {/* Nombre */}
               <li>
