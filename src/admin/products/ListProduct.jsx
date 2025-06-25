@@ -54,6 +54,11 @@ function ListProduct() {
             type="text"
             value={inputSearch}
             onChange={(e) => setInputSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                buscarPorNombre(inputSearch);
+              }
+            }}
             placeholder="🔎 Buscar por nombre"
             className="w-full px-4 py-2 pr-10 bg-white text-black rounded-xl"
           />

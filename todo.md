@@ -2,8 +2,6 @@
 
 # Dashboard
 
-    - accesibilidad: al dar enter también buscar por nombre
-
 # Catálogo
 
     - optimizar carga imágenes catálogo
