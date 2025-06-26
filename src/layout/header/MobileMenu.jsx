@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setGenero } from "../../store/filtroSlice";
 
 function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const totalQuantity = cartItems.reduce(
     (total, item) => total + item.quantity,
@@ -11,19 +13,22 @@ function MobileMenu() {
   );
 
   return (
-    <header className="lg:hidden flex items-center justify-between px-6 py-4 bg-[#f5f5f5] sticky top-0 z-50">
+    <header className="lg:hidden flex justify-around items-center px-6 py-4 bg-[#f5f5f5] sticky top-0 z-50">
       {/* Izquierda - Logo */}
-      <Link to={"/"}>
-        <div className="text-orange-600 font-semibold text-xl">UrbanwearX</div>
-      </Link>
 
       {/* Centro - Botón hamburguesa */}
-      <button onClick={() => setIsOpen(!isOpen)} className="text-2xl">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="justify-self-center text-2xl"
+      >
         ☰
       </button>
 
       {/* Derecha - Carrito */}
-      <Link to={"/carrito"} className="flex items-center gap-1">
+      <Link
+        to={"/carrito"}
+        className="flex items-center gap-1 justify-self-end"
+      >
         <span>🛒</span>
         <span>{totalQuantity}</span>
       </Link>
@@ -38,8 +43,14 @@ function MobileMenu() {
             <Link to="/catalogo" onClick={() => setIsOpen(false)}>
               🛍️ Catálogo
             </Link>
-            <span className="text-gray-400">👨 Hombre (en desarrollo)</span>
-            <span className="text-gray-400">👩 Mujer (en desarrollo)</span>
+            <Link to="/catalogo" onClick={() => setIsOpen(false)}>
+              <span onClick={() => dispatch(setGenero("hombre"))}>
+                👨 Hombre
+              </span>
+            </Link>
+            <Link to="/catalogo" onClick={() => setIsOpen(false)}>
+              <span onClick={() => dispatch(setGenero("mujer"))}>👩 Mujer</span>
+            </Link>
             <Link to="/admin" onClick={() => setIsOpen(false)}>
               🔧 Admin
             </Link>

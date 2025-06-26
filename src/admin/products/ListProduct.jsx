@@ -11,9 +11,12 @@ import { useProductos } from "../../api/hooks/useProductos";
 // UI
 import Button from "../ui/Button";
 import LoadingSpinner from "../../components/ui/LoadingSpinner2";
+import GeneroButton from "../ui/GeneroButton";
 
 function ListProduct() {
   const [inputSearch, setInputSearch] = useState(""); // 🔎 input búsqueda
+  const [generoBtnActive, setGeneroBtnActive] = useState("todos"); // Género activo para filtrar
+
   const {
     productos,
     loading,
@@ -27,6 +30,8 @@ function ListProduct() {
     ordenarPorCampo,
     campoOrden,
     ordenAscendente,
+    fetchProductosPorGenero,
+    fetchProductos,
   } = useProductos();
 
   // ✖ Manejo del delete (confirmación y llamada a la API)
@@ -49,7 +54,7 @@ function ListProduct() {
       <h2 className="text-xl font-semibold">Listado de productos</h2>
       {/* 🔎 Barra búsqueda */}
       <div className="flex gap-x-2 max-w-7xl">
-        <div className="relative w-1/2">
+        <div className="relative lg:w-1/2">
           <input
             type="text"
             value={inputSearch}
@@ -79,6 +84,37 @@ function ListProduct() {
             <LoadingSpinner delay={0} />
           </div>
         )}
+      </div>
+
+      {/* Botones de género */}
+      <div className="flex gap-x-1 [&>input]:text-white hover:[&>input]:cursor-pointer [&>input]:p-2 [&>input]:rounded-md">
+        <GeneroButton
+          value="Todos"
+          color="slate"
+          active={generoBtnActive === "todos"}
+          onClick={() => {
+            fetchProductos();
+            setGeneroBtnActive("todos");
+          }}
+        />
+        <GeneroButton
+          value="Hombre"
+          color="blue"
+          active={generoBtnActive === "hombre"}
+          onClick={() => {
+            fetchProductosPorGenero("hombre");
+            setGeneroBtnActive("hombre");
+          }}
+        />
+        <GeneroButton
+          value="Mujer"
+          color="pink"
+          active={generoBtnActive === "mujer"}
+          onClick={() => {
+            fetchProductosPorGenero("mujer");
+            setGeneroBtnActive("mujer");
+          }}
+        />
       </div>
 
       {/* Tabla */}

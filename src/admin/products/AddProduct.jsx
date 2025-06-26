@@ -90,7 +90,7 @@ function AddProduct() {
         {/* Contenedor inputs */}
         <div className="flex flex-col gap-y-4">
           {/* Arriba */}
-          <div className="flex gap-x-2">
+          <div className="flex md:flex-row gap-y-2 flex-col gap-x-2">
             {/* Nombre */}
             <input
               onChange={(e) =>

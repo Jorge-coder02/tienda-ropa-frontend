@@ -1,35 +1,32 @@
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import { useEffect } from "react";
 import MobileMenu from "./header/MobileMenu";
+import { setGenero } from "../store/filtroSlice";
+import { useDispatch } from "react-redux";
 
 function Header() {
   // Determina si la ruta coincide
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
-  // useEffect(() => {
-  //   console.log(location.pathname);
-  // }, []);
 
+  const dispatch = useDispatch();
+  // Obtener los productos del carrito desde el estado de Redux
   const cartItems = useSelector((state) => state.cart.items);
+
   // Calcular la cantidad total de productos (sumando la cantidad de cada producto)
   const totalQuantity = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
   );
 
-  // Console carrito
   return (
     <>
       {/* 📱 Mobile Menu */}
-      <div className="lg:hidden">
-        <MobileMenu />
-      </div>
-
+      <MobileMenu />
       {/* 💻 Pc Menu */}
       <header
         className="hidden lg:flex lg:flex-row flex-col sticky top-0 z-50 justify-between items-center px-12 
-        [&>nav]:gap-x-4 [&>nav>a]:py-6 [&>nav>a]:px-2 bg-[#f5f5f5]"
+          [&>nav]:gap-x-4 [&>nav>a]:py-6 [&>nav>a]:px-2 bg-[#f5f5f5]"
       >
         <nav className="flex justify-center items-center ">
           <Link className="" to={"/"}>
@@ -54,43 +51,25 @@ function Header() {
             </Link>
             <div className="group relative inline-block">
               <Link
-                to="/mujer"
+                to="/catalogo"
                 className={
-                  isActive("/mujer")
-                    ? "text-gray-800"
-                    : "text-gray-400 pointer-events-none cursor-default"
+                  isActive("/hombre") ? "text-gray-800" : "text-gray-400"
                 }
-                aria-disabled="true"
+                onClick={() => dispatch(setGenero("hombre"))}
               >
                 HOMBRE
               </Link>
-              <span
-                className="absolute invisible group-hover:visible bg-gray-800 text-white text-xs rounded 
-              py-1 px-2 bottom-1/2 left-1/2 transform -translate-x-1/2 mb-2 whitespace-nowrap"
-              >
-                🔧En desarrollo
-                <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-t-gray-800 border-transparent"></span>
-              </span>
             </div>
             <div className="group relative inline-block">
               <Link
-                to="/hombre"
+                to="/catalogo"
                 className={
-                  isActive("/hombre")
-                    ? "text-gray-800"
-                    : "text-gray-400 pointer-events-none cursor-default"
+                  isActive("/mujer") ? "text-gray-800" : "text-gray-400"
                 }
-                aria-disabled="true"
+                onClick={() => dispatch(setGenero("mujer"))}
               >
                 MUJER
               </Link>
-              <span
-                className="absolute invisible group-hover:visible bg-gray-800 text-white text-xs rounded 
-              py-1 px-2 bottom-1/2 left-1/2 transform -translate-x-1/2 mb-2 whitespace-nowrap"
-              >
-                🔧En desarrollo
-                <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-t-gray-800 border-transparent"></span>
-              </span>
             </div>
           </div>
         </nav>

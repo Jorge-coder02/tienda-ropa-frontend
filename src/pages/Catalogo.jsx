@@ -34,11 +34,6 @@ function Catalogo() {
   }, [scrollPosition]);
 
   // 🚀 Petición inicial productos y consulta de filtro ahora se manejan en useFetchProductos hook
-  // Eliminar lógica redundante de fetchProductos y handleClickFiltro
-  const handleClickFiltro = () => {
-    // Esta función puede quedar vacía o simplemente actualizar el filtro seleccionado si es necesario
-    // Si useFetchProductos depende de filtroSelect, se actualizará automáticamente
-  };
 
   return (
     <Layout>
@@ -87,12 +82,6 @@ function Catalogo() {
                 <option value="accesorios">Accesorios</option>
                 {/* Aquí puedes añadir más categorías según tu base de datos */}
               </select>
-              <input
-                onClick={handleClickFiltro} // Aquí puedes implementar la lógica de búsqueda
-                className="bg-[#f5f4f4] p-1 cursor-pointer rounded-lg"
-                type="button"
-                value="🔎"
-              />
             </nav>
           </div>
           {/* ❌ Si no hay productos */}

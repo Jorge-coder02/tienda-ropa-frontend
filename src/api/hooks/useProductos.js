@@ -60,6 +60,20 @@ export function useProductos() {
     fetchProductos();
   }, []);
 
+  // 💬 Fetch por género
+  const fetchProductosPorGenero = async (genero) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await api.get(`/productos/genero/${genero}`);
+      setProductos(response.data);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // 💬 Buscar por nombre
   const buscarPorNombre = async (nombre) => {
     setLoading(true);
@@ -142,5 +156,6 @@ export function useProductos() {
     ordenarPorCampo,
     campoOrden,
     ordenAscendente,
+    fetchProductosPorGenero,
   };
 }

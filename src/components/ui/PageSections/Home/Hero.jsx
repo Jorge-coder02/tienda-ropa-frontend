@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 function Hero() {
   return (
-    <section className="relative min-h-[calc(100dvh-76px)] flex flex-col gap-y-8 justify-center items-center pb-40 px-6 overflow-hidden">
+    <section className="relative min-h-[calc(100dvh-62px)] flex flex-col gap-y-8 justify-center items-center pb-40 px-6 overflow-hidden">
       {/* Capa de fondo con blur (pseudo-elemento) */}
       <div
         className="absolute inset-0 -z-10 bg-cover bg-center"
