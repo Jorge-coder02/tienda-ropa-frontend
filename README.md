@@ -105,6 +105,6 @@ npm run dev
 ## Licencia
 Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
 
-## Si tienes preguntas o sugerencias, no dudes en abrir un issue o PR.
+Si tienes preguntas o sugerencias, no dudes en abrir un issue o PR.
 
 
