@@ -105,8 +105,6 @@ npm run dev
 ## Licencia
 Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
 
-# Si tienes preguntas o sugerencias, no dudes en abrir un issue o PR.
-```bash
-Si quieres, te ayudo a ajustar aún más el README para roles específicos (frontend, fullstack), o añadir secciones para testing, deploy, etc. ¿Qué te parece?
-```
+## Si tienes preguntas o sugerencias, no dudes en abrir un issue o PR.
+
 
