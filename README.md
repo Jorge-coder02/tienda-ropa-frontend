@@ -6,7 +6,7 @@
 🔗 **Visitar sitio:** [Ver en vivo](https://urbanwearx.netlify.app/)
 
 ## Sobre el sitio
-**UrbanwearX** es una tienda online de ropa con carrito de compras, API propia y dashboard administrativo para gestionar productos. Construida con un stack moderno para ofrecer una experiencia fluida y escalable.
+**UrbanwearX** es una tienda online de ropa con carrito de compras, API propia de productos y dashboard administrativo para gestionarlos. Construida con un stack moderno para ofrecer una experiencia fluida y escalable.
 
 ## 🚀 Tecnologías Principales
 
@@ -101,3 +101,12 @@ npm run dev
 
 - eslint: `9.25.0`
 - postcss: `8.4.21`
+
+## Licencia
+Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+
+# Si tienes preguntas o sugerencias, no dudes en abrir un issue o PR.
+```bash
+Si quieres, te ayudo a ajustar aún más el README para roles específicos (frontend, fullstack), o añadir secciones para testing, deploy, etc. ¿Qué te parece?
+```
+
