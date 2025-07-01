@@ -5,6 +5,9 @@
 
 🔗 **Visitar sitio:** [Ver en vivo](https://urbanwearx.netlify.app/)
 
+## Sobre el sitio
+**UrbanwearX** es una tienda online de ropa con carrito de compras, API propia y dashboard administrativo para gestionar productos. Construida con un stack moderno para ofrecer una experiencia fluida y escalable.
+
 ## 🚀 Tecnologías Principales
 
 ![React](https://img.shields.io/badge/React-19.1.0-61DAFB?logo=react)
@@ -85,7 +88,7 @@ npm run dev
 - React: `19.1.0`
 - Tailwind CSS: `3.3.3`
 
-## Dependencias
+## Dependencias principales
 
 - React Router: `7.6.0`
 - React Redux: `9.2.0`
