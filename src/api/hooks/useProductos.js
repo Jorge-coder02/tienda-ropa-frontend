@@ -152,7 +152,7 @@ export function useProductos() {
     editingProductId,
     setEditingProductId,
     fetchProductos,
-    productos: productosOrdenados, // exportas los ordenados
+    productos: productosOrdenados, // exporto los ordenados
     ordenarPorCampo,
     campoOrden,
     ordenAscendente,

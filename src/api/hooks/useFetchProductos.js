@@ -20,7 +20,7 @@ export function useFetchProductos(genero, categoria = "all") {
           });
         }
 
-        // Espera artificial de mínimo 300ms si el fetch fue instantáneo
+        // Espera artificial de mínimo 300ms si el fetch fue instantáneo para skeleton loading
         await new Promise((res) => setTimeout(res, 450));
 
         setProductos(response.data);

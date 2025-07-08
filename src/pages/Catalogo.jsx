@@ -2,13 +2,10 @@
 import Layout from "../layout/Layout";
 import ItemProducto from "../components/ui/PageComps/catalogo/ItemProducto";
 import { useEffect, useState } from "react";
-import api from "../api/axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setGenero } from "../store/filtroSlice";
 import ProductSkeleton from "../utility/ProductSkeleton";
 import { useFetchProductos } from "../api/hooks/useFetchProductos"; // ruta según dónde lo guardes
-// import CategorySkeleton from "../utility/CategorySkeleton";
-// en el futuro usar categoryskeleton
 
 function Catalogo() {
   const dispatch = useDispatch();
